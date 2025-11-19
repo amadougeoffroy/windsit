@@ -29,6 +29,7 @@ vendor/
 .env
 .env.local
 config.local.js
+config.php
 
 # Fichiers de build (si vous en avez)
 dist/
