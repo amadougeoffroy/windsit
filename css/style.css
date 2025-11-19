@@ -295,6 +295,7 @@ ul {
 /* Mobile Menu */
 @media (max-width: 767px) {
     .nav-menu {
+        display: flex;
         position: fixed;
         top: 70px;
         left: -100%;
@@ -305,7 +306,9 @@ ul {
         align-items: center;
         justify-content: center;
         gap: 2rem;
-        transition: var(--transition);
+        transition: left 0.3s ease-in-out;
+        z-index: 1000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
     
     .nav-menu.active {
@@ -314,6 +317,13 @@ ul {
     
     .nav-link {
         font-size: 1.5rem;
+        padding: 1rem 2rem;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .nav-link::after {
+        display: none;
     }
 }
 
