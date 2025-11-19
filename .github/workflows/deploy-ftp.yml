@@ -35,6 +35,7 @@ jobs:
             **/README.md
             **/.github/**
             **/INSTRUCTIONS-DEPLOIEMENT.txt
+            **/test-rewrite.html
           
       - name: ✅ Déploiement terminé
         run: |
