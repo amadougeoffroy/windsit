@@ -264,6 +264,7 @@ ul {
     gap: 5px;
     cursor: pointer;
     z-index: 1001;
+    padding: 0.5rem;
 }
 
 @media (min-width: 768px) {
