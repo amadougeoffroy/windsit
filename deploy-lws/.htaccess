@@ -77,6 +77,25 @@ Options -Indexes
 
 # Activer le module de réécriture
 RewriteEngine On
+RewriteBase /
+
+# ====================================
+# URLs SANS EXTENSION .html
+# ====================================
+
+# Rediriger les URLs avec .html vers sans .html
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Ajouter .html en interne pour les URLs sans extension
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.+)$ $1.html [L,QSA]
+
+# Redirection page d'accueil
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.html [NC]
+RewriteRule ^index\.html$ / [R=301,L]
 
 # Forcer HTTPS (si vous avez un certificat SSL)
 # Décommenter les lignes ci-dessous une fois le SSL activé
