@@ -87,8 +87,8 @@ RewriteBase /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.html [NC]
 RewriteRule ^index\.html$ / [R=301,L]
 
-# RÈGLE SPÉCIALE : Forcer /services vers services.html (contourner conflit dossier)
-RewriteRule ^services/?$ /services.html [L,NC]
+# RÈGLE SPÉCIALE : Rediriger /services vers /nos-services (éviter conflit dossier)
+RewriteRule ^services/?$ /nos-services [R=301,L,NC]
 
 # Rediriger les URLs avec .html vers sans .html (redirection permanente)
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
