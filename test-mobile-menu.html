@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Menu Mobile - WindsIT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .debug-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #fff;
+            padding: 15px;
+            border: 2px solid #FF6B35;
+            border-radius: 8px;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            font-size: 12px;
+            max-width: 300px;
+        }
+        .debug-info h3 {
+            margin: 0 0 10px 0;
+            color: #FF6B35;
+        }
+        .debug-info p {
+            margin: 5px 0;
+        }
+        .debug-info strong {
+            color: #333;
+        }
+        .test-section {
+            padding: 20px;
+            margin-top: 80px;
+        }
+        .test-button {
+            padding: 15px 30px;
+            background: #FF6B35;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .hamburger-test {
+            display: flex !important;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            width: fit-content;
+        }
+        .hamburger-test span {
+            width: 30px;
+            height: 3px;
+            background: #333;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">Winds<span>IT</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link active">Accueil</a></li>
+                <li><a href="/nos-services" class="nav-link">Services</a></li>
+                <li><a href="/realisations" class="nav-link">Réalisations</a></li>
+                <li><a href="/about" class="nav-link">À propos</a></li>
+                <li><a href="/contact" class="nav-link btn-nav">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger" style="border: 2px solid red;">
+                <span style="background: red !important;"></span>
+                <span style="background: red !important;"></span>
+                <span style="background: red !important;"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="test-section">
+        <h1>🧪 Test Menu Mobile WindsIT</h1>
+        <p>Cette page teste le menu mobile et le bouton hamburger.</p>
+        
+        <h2>📱 Instructions :</h2>
+        <ol>
+            <li>Réduisez la fenêtre à moins de 768px (ou utilisez un mobile)</li>
+            <li>Le bouton hamburger (☰) devrait être visible en haut à droite</li>
+            <li>Il a une bordure ROUGE pour être bien visible</li>
+            <li>Cliquez dessus pour ouvrir le menu</li>
+        </ol>
+
+        <h2>🔧 Test manuel du hamburger :</h2>
+        <p>Voici un hamburger de test (devrait toujours être visible) :</p>
+        <div class="hamburger-test" onclick="alert('Hamburger cliqué !')">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <p><em>↑ Cliquez sur ce hamburger pour tester</em></p>
+
+        <h2>🎮 Tests JavaScript :</h2>
+        <button class="test-button" onclick="testHamburger()">
+            Test 1 : Vérifier hamburger
+        </button>
+        <button class="test-button" onclick="testMenu()">
+            Test 2 : Toggle menu
+        </button>
+        <button class="test-button" onclick="showCSS()">
+            Test 3 : Afficher CSS appliqué
+        </button>
+    </div>
+
+    <div class="debug-info" id="debugInfo">
+        <h3>📊 Info Debug</h3>
+        <p><strong>Largeur écran:</strong> <span id="screenWidth">-</span>px</p>
+        <p><strong>Hamburger existe:</strong> <span id="hamburgerExists">-</span></p>
+        <p><strong>Hamburger display:</strong> <span id="hamburgerDisplay">-</span></p>
+        <p><strong>Menu display:</strong> <span id="menuDisplay">-</span></p>
+        <p><strong>Menu actif:</strong> <span id="menuActive">-</span></p>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Update debug info
+        function updateDebug() {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.getElementById('nav-menu');
+            
+            document.getElementById('screenWidth').textContent = window.innerWidth;
+            document.getElementById('hamburgerExists').textContent = hamburger ? 'OUI ✅' : 'NON ❌';
+            document.getElementById('hamburgerDisplay').textContent = hamburger ? getComputedStyle(hamburger).display : 'N/A';
+            document.getElementById('menuDisplay').textContent = menu ? getComputedStyle(menu).display : 'N/A';
+            document.getElementById('menuActive').textContent = menu && menu.classList.contains('active') ? 'OUI ✅' : 'NON ❌';
+        }
+
+        function testHamburger() {
+            const hamburger = document.getElementById('hamburger');
+            if (!hamburger) {
+                alert('❌ ERREUR: Hamburger introuvable dans le DOM !');
+                return;
+            }
+            
+            const styles = getComputedStyle(hamburger);
+            const info = `
+✅ Hamburger trouvé !
+
+Display: ${styles.display}
+Visibility: ${styles.visibility}
+Opacity: ${styles.opacity}
+Position: ${styles.position}
+Z-index: ${styles.zIndex}
+Width: ${styles.width}
+Height: ${styles.height}
+
+Classes: ${hamburger.className}
+            `;
+            alert(info);
+            console.log('Hamburger element:', hamburger);
+            console.log('Computed styles:', styles);
+        }
+
+        function testMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.getElementById('nav-menu');
+            
+            if (!hamburger || !menu) {
+                alert('❌ Elements manquants !');
+                return;
+            }
+            
+            hamburger.classList.toggle('active');
+            menu.classList.toggle('active');
+            
+            alert(`Menu toggled!\nMenu actif: ${menu.classList.contains('active')}`);
+            updateDebug();
+        }
+
+        function showCSS() {
+            const hamburger = document.getElementById('hamburger');
+            if (!hamburger) {
+                alert('❌ Hamburger introuvable');
+                return;
+            }
+            
+            const computed = getComputedStyle(hamburger);
+            const info = `
+TOUS LES STYLES CSS :
+
+display: ${computed.display}
+flex-direction: ${computed.flexDirection}
+gap: ${computed.gap}
+cursor: ${computed.cursor}
+z-index: ${computed.zIndex}
+padding: ${computed.padding}
+margin: ${computed.margin}
+width: ${computed.width}
+height: ${computed.height}
+background: ${computed.background}
+            `;
+            console.log('Full computed styles:', computed);
+            alert(info);
+        }
+
+        // Update debug info on load and resize
+        updateDebug();
+        window.addEventListener('resize', updateDebug);
+        setInterval(updateDebug, 1000);
+
+        console.log('🧪 Page de test chargée');
+        console.log('Hamburger element:', document.getElementById('hamburger'));
+        console.log('Menu element:', document.getElementById('nav-menu'));
+    </script>
+</body>
+</html>
+
