@@ -1,0 +1,24 @@
+# Configuration sensible - NE JAMAIS COMMITER
+config.php
+
+# Fichiers de sauvegarde
+*.bak
+*.tmp
+*.log
+
+# Fichiers systèmes
+.DS_Store
+Thumbs.db
+
+# Fichiers IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node modules (si utilisé)
+node_modules/
+
+# Fichiers temporaires PHP
+*.php~
+

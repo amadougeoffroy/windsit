@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog WindsIT - Actualités, conseils et tendances dans le domaine des TIC et du digital">
+    <title>Blog - WindsIT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .page-hero {
+            padding: 150px 0 100px;
+            background: var(--gradient-soft);
+        }
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        .blog-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        .blog-image {
+            width: 100%;
+            height: 250px;
+            background: var(--gradient-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-image i {
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.3;
+        }
+        .blog-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        .blog-content {
+            padding: 2rem;
+        }
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+        .blog-meta i {
+            color: var(--primary);
+        }
+        .blog-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            line-height: 1.3;
+        }
+        .blog-excerpt {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .read-more:hover {
+            gap: 1rem;
+        }
+        .read-more i {
+            transition: var(--transition);
+        }
+        .newsletter-section {
+            background: var(--gradient);
+            color: var(--white);
+            padding: 4rem 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+        .newsletter-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        .newsletter-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+        }
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            background: var(--white);
+            color: var(--primary);
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .newsletter-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .newsletter-form input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">Winds<span>IT</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link" data-i18n="nav_home">Accueil</a></li>
+                <li><a href="/services" class="nav-link" data-i18n="nav_services">Services</a></li>
+                <li><a href="/realisations" class="nav-link" data-i18n="nav_realisations">Réalisations</a></li>
+                <li><a href="/about" class="nav-link" data-i18n="nav_about">À propos</a></li>
+                <li><a href="/blog" class="nav-link active" data-i18n="nav_blog">Blog</a></li>
+                <li><a href="/faq" class="nav-link">FAQ</a></li>
+                <li><a href="/contact" class="nav-link btn-nav" data-i18n="nav_contact">Contact</a></li>
+                <li class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSelector">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container text-center">
+            <span class="section-tag" data-aos="fade-up" data-i18n="blog_hero_tag">Blog</span>
+            <h1 data-aos="fade-up" data-aos-delay="100"><span data-i18n="blog_hero_title">Actualités &</span> <span class="gradient-text" data-i18n="blog_hero_title_gradient">Insights</span></h1>
+            <p data-aos="fade-up" data-aos-delay="200" style="font-size: 1.25rem; color: var(--gray); max-width: 700px; margin: 0 auto;" data-i18n="blog_hero_subtitle">
+                Découvrez nos derniers articles, conseils et analyses sur les tendances du digital, 
+                du développement web et des technologies émergentes
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Articles -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Article 1 -->
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-image">
+                        <i class="fas fa-brain"></i>
+                        <span class="blog-category">Intelligence Artificielle</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 15 Janvier 2025</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3 class="blog-title">L'IA générative transforme le développement web en 2025</h3>
+                        <p class="blog-excerpt">
+                            Découvrez comment l'intelligence artificielle générative révolutionne la création de sites web, 
+                            du design automatisé à la génération de code. Les outils comme ChatGPT et Midjourney changent 
+                            radicalement la façon dont nous concevons et développons des solutions digitales.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="blog-image">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span class="blog-category">Mobile First</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 10 Janvier 2025</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                        <h3 class="blog-title">Progressive Web Apps : L'avenir des applications mobiles</h3>
+                        <p class="blog-excerpt">
+                            Les PWA combinent le meilleur du web et des apps natives. Performance, accessibilité hors ligne 
+                            et expérience utilisateur optimale : découvrez pourquoi les PWA sont l'avenir du développement mobile 
+                            et comment elles peuvent transformer votre présence digitale.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="blog-image">
+                        <i class="fas fa-paint-brush"></i>
+                        <span class="blog-category">Design UX/UI</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 5 Janvier 2025</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3 class="blog-title">10 principes UX pour améliorer la conversion de votre site</h3>
+                        <p class="blog-excerpt">
+                            Un bon design ne se limite pas à l'esthétique. Apprenez les 10 principes fondamentaux 
+                            d'expérience utilisateur qui peuvent doubler vos taux de conversion : de la hiérarchie visuelle 
+                            aux micro-interactions, en passant par l'optimisation des formulaires.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-image">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="blog-category">Cybersécurité</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 28 Décembre 2024</span>
+                            <span><i class="far fa-clock"></i> 8 min</span>
+                        </div>
+                        <h3 class="blog-title">Sécurité web : Les essentiels pour protéger votre site en 2025</h3>
+                        <p class="blog-excerpt">
+                            Les cyberattaques sont en hausse. SSL/TLS, authentification à deux facteurs, protection CSRF et XSS : 
+                            découvrez les mesures de sécurité indispensables pour protéger votre site web et les données 
+                            de vos utilisateurs contre les menaces actuelles.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="blog-image">
+                        <i class="fas fa-chart-line"></i>
+                        <span class="blog-category">Marketing Digital</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 20 Décembre 2024</span>
+                            <span><i class="far fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3 class="blog-title">SEO en 2025 : Les nouvelles règles du référencement Google</h3>
+                        <p class="blog-excerpt">
+                            Google modifie constamment son algorithme. Core Web Vitals, E-E-A-T, contenu optimisé pour l'IA : 
+                            découvrez les nouvelles stratégies SEO pour maintenir et améliorer votre visibilité dans 
+                            les résultats de recherche cette année.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="blog-image">
+                        <i class="fas fa-laptop-code"></i>
+                        <span class="blog-category">Développement Web</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 15 Décembre 2024</span>
+                            <span><i class="far fa-clock"></i> 10 min</span>
+                        </div>
+                        <h3 class="blog-title">React, Vue ou Angular ? Choisir le bon framework en 2025</h3>
+                        <p class="blog-excerpt">
+                            Le choix du framework JavaScript est crucial pour votre projet. Analyse comparative approfondie 
+                            des trois géants : performances, courbe d'apprentissage, écosystème et cas d'usage. 
+                            Découvrez lequel correspond le mieux à vos besoins spécifiques.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 7 -->
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-image">
+                        <i class="fas fa-rocket"></i>
+                        <span class="blog-category">Performance</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 8 Décembre 2024</span>
+                            <span><i class="far fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3 class="blog-title">Optimisation des performances web : De 5s à 1s de chargement</h3>
+                        <p class="blog-excerpt">
+                            Chaque seconde compte ! Un site lent perd des visiteurs et du chiffre d'affaires. 
+                            Lazy loading, compression d'images, CDN, code splitting : découvrez les techniques concrètes 
+                            pour accélérer drastiquement votre site web.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 8 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="blog-image">
+                        <i class="fas fa-users"></i>
+                        <span class="blog-category">Social Media</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 1 Décembre 2024</span>
+                            <span><i class="far fa-clock"></i> 7 min</span>
+                        </div>
+                        <h3 class="blog-title">Stratégie social media 2025 : Les tendances à ne pas manquer</h3>
+                        <p class="blog-excerpt">
+                            Le paysage des réseaux sociaux évolue rapidement. Contenu vidéo court, authenticité, 
+                            social commerce et IA pour la création de contenu : découvrez les tendances qui domineront 
+                            les stratégies social media cette année.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 9 -->
+                <article class="blog-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="blog-image">
+                        <i class="fas fa-database"></i>
+                        <span class="blog-category">Data & Analytics</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> 25 Novembre 2024</span>
+                            <span><i class="far fa-clock"></i> 9 min</span>
+                        </div>
+                        <h3 class="blog-title">Data-driven marketing : Exploitez vos données pour booster vos ventes</h3>
+                        <p class="blog-excerpt">
+                            Les données sont le nouvel or du marketing digital. Google Analytics 4, attribution modeling, 
+                            segmentation client avancée : apprenez à transformer vos données en insights actionnables 
+                            pour des campagnes marketing plus performantes.
+                        </p>
+                        <a href="#" class="read-more">
+                            Lire l'article <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="newsletter-section" data-aos="fade-up">
+                <i class="fas fa-envelope" style="font-size: 3rem; margin-bottom: 1.5rem; opacity: 0.9;"></i>
+                <h3 data-i18n="blog_newsletter_title">Restez informé des dernières tendances</h3>
+                <p data-i18n="blog_newsletter_subtitle">Abonnez-vous à notre newsletter et recevez nos meilleurs articles directement dans votre boîte mail</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <input type="email" data-i18n="blog_newsletter_placeholder" placeholder="Votre adresse email" required>
+                    <button type="submit">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-i18n="blog_newsletter_submit">S'abonner</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>Winds<span>IT</span></h3>
+                    </div>
+                    <p class="footer-description">
+                        Agence de digitalisation spécialisée en solutions digitales innovantes, 
+                        branding et développement web & mobile.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/services">Social Media Management</a></li>
+                        <li><a href="/services">Branding & Identité</a></li>
+                        <li><a href="/services">Développement Web</a></li>
+                        <li><a href="/services">Applications Mobile</a></li>
+                        <li><a href="/services">Solutions IA</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="/about">À propos</a></li>
+                        <li><a href="/realisations">Réalisations</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/carrieres">Carrières</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Abidjan Cocody Angré Djorogobité<br>Côte d'Ivoire</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@windsit.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+225 07 78 13 72 32</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindsIT. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Newsletter form submission
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = this.querySelector('input[type="email"]').value;
+            const button = this.querySelector('button');
+            
+            button.disabled = true;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                showNotification('Merci pour votre abonnement ! Vous recevrez bientôt nos meilleurs articles.', 'success');
+                this.reset();
+                button.disabled = false;
+                button.innerHTML = '<i class="fas fa-paper-plane"></i> S\'abonner';
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
+

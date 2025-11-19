@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez nos réalisations : identité visuelle, sites web, applications mobiles, solutions IA">
+    <title>Nos Réalisations - WindsIT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-hero {
+            padding: 150px 0 100px;
+            background: var(--gradient-soft);
+        }
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .filter-section {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+        .filter-btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid var(--light);
+            background: var(--white);
+            color: var(--dark-light);
+            border-radius: var(--radius-xl);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gradient);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .portfolio-item {
+            transition: var(--transition);
+        }
+        .project-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            padding: 2rem;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+        
+        .project-modal.active {
+            display: flex !important;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        .modal-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        .project-details h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: var(--radius-md);
+        }
+        .meta-item strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .results-list {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            margin-top: 2rem;
+        }
+        .results-list h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .results-list ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .results-list ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">Winds<span>IT</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link" data-i18n="nav_home">Accueil</a></li>
+                <li><a href="/services" class="nav-link" data-i18n="nav_services">Services</a></li>
+                <li><a href="/realisations" class="nav-link active" data-i18n="nav_realisations">Réalisations</a></li>
+                <li><a href="/about" class="nav-link" data-i18n="nav_about">À propos</a></li>
+                <li><a href="/blog" class="nav-link" data-i18n="nav_blog">Blog</a></li>
+                <li><a href="/faq" class="nav-link">FAQ</a></li>
+                <li><a href="/contact" class="nav-link btn-nav" data-i18n="nav_contact">Contact</a></li>
+                <li class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSelector">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container text-center">
+            <span class="section-tag" data-aos="fade-up" data-i18n="realisations_hero_tag">Portfolio</span>
+            <h1 data-aos="fade-up" data-aos-delay="100"><span data-i18n="realisations_hero_title">Nos</span> <span class="gradient-text" data-i18n="realisations_hero_title_gradient">réalisations</span></h1>
+            <p data-aos="fade-up" data-aos-delay="200" style="font-size: 1.25rem; color: var(--gray); max-width: 600px; margin: 0 auto;" data-i18n="realisations_hero_subtitle">
+                Découvrez nos projets qui illustrent notre expertise et notre passion pour l'innovation digitale
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="filter-section" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all" data-i18n="realisations_filter_all">Tous les projets</button>
+                <button class="filter-btn" data-filter="identite" data-i18n="realisations_filter_branding">Identité Visuelle</button>
+                <button class="filter-btn" data-filter="social" data-i18n="realisations_filter_social">Social Media</button>
+                <button class="filter-btn" data-filter="web" data-i18n="realisations_filter_web">Sites Web</button>
+                <button class="filter-btn" data-filter="mobile" data-i18n="realisations_filter_mobile">Applications Mobile</button>
+                <button class="filter-btn" data-filter="solution">Solutions Personnalisées</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+                <!-- Projet 1 - Identité Visuelle -->
+                <div class="portfolio-item" data-category="identite" data-aos="zoom-in">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-1.svg" alt="Rebranding Complet">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Identité Visuelle</span>
+                                <h3 class="portfolio-title">Rebranding TechStart</h3>
+                                <p>Création complète d'une nouvelle identité moderne et impactante</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project1'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 2 - E-commerce -->
+                <div class="portfolio-item" data-category="web" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-2.svg" alt="Boutique en Ligne">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Site E-commerce</span>
+                                <h3 class="portfolio-title">Fashion Store</h3>
+                                <p>Site e-commerce avec +200% de conversion en 3 mois</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project2'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 3 - App Mobile -->
+                <div class="portfolio-item" data-category="mobile" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-3.svg" alt="Application Mobile">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Application Mobile</span>
+                                <h3 class="portfolio-title">FitTracker App</h3>
+                                <p>Application fitness avec 50k+ téléchargements</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project3'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 4 - Social Media -->
+                <div class="portfolio-item" data-category="social" data-aos="zoom-in">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-4.svg" alt="Campagne Social Media">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Social Media</span>
+                                <h3 class="portfolio-title">Campagne BeautyBrand</h3>
+                                <p>+300% de followers et engagement multiplié par 2</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project4'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 5 - ERP -->
+                <div class="portfolio-item" data-category="solution" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-5.svg" alt="ERP Sur Mesure">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">ERP Sur Mesure</span>
+                                <h3 class="portfolio-title">LogiPro ERP</h3>
+                                <p>Solution ERP avec 40% de gain de productivité</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project5'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 6 - Chatbot IA -->
+                <div class="portfolio-item" data-category="solution" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-6.svg" alt="Chatbot IA">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Solution IA</span>
+                                <h3 class="portfolio-title">SmartBot Assistant</h3>
+                                <p>Assistant virtuel avec IA pour service client 24/7</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project6'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 7 - Site Vitrine -->
+                <div class="portfolio-item" data-category="web" data-aos="zoom-in">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-2.svg" alt="Site Corporate">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Site Corporate</span>
+                                <h3 class="portfolio-title">Cabinet d'Avocats</h3>
+                                <p>Site vitrine élégant avec 150% d'augmentation de leads</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project2'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 8 - Identité -->
+                <div class="portfolio-item" data-category="identite" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-1.svg" alt="Logo & Charte">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Identité Visuelle</span>
+                                <h3 class="portfolio-title">Restaurant Gourmet</h3>
+                                <p>Logo et charte graphique pour restaurant haut de gamme</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project1'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projet 9 - App Mobile -->
+                <div class="portfolio-item" data-category="mobile" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-3.svg" alt="App Delivery">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Application Mobile</span>
+                                <h3 class="portfolio-title">QuickDelivery App</h3>
+                                <p>App de livraison avec 100k+ utilisateurs actifs</p>
+                                <a href="#" class="btn btn-sm btn-white" onclick="openProjectModal('project3'); return false;">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title"><span data-i18n="realisations_stats_title">Nos chiffres</span> <span class="gradient-text">parlent d'eux-mêmes</span></h2>
+            </div>
+            <div style="display: flex; justify-content: space-around; align-items: center; flex-wrap: nowrap; gap: 2rem; text-align: center; overflow-x: auto; padding: 1rem 0;">
+                <div data-aos="fade-up" style="flex: 1; min-width: 150px;">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">
+                        <span class="stat-number" data-count="150">0</span>+
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--gray);" data-i18n="realisations_stat_projects">Projets réalisés</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" style="flex: 1; min-width: 150px;">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">
+                        <span class="stat-number" data-count="98">0</span>%
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--gray);" data-i18n="realisations_stat_clients">Clients satisfaits</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" style="flex: 1; min-width: 150px;">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">
+                        <span class="stat-number" data-count="200">0</span>%
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--gray);" data-i18n="realisations_stat_satisfaction">ROI moyen</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" style="flex: 1; min-width: 150px;">
+                    <div style="font-size: 3.5rem; font-weight: 800; color: var(--primary); margin-bottom: 0.5rem;">
+                        <span class="stat-number" data-count="24">0</span>/7
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--gray);" data-i18n="realisations_stat_support">Support disponible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta section-padding">
+        <div class="cta-background"></div>
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2>Prêt à créer quelque chose d'exceptionnel ?</h2>
+                <p>Transformons votre vision en réalité digitale</p>
+                <div class="cta-buttons">
+                    <a href="/contact" class="btn btn-white btn-lg">
+                        Démarrer un projet
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>Winds<span>IT</span></h3>
+                    </div>
+                    <p class="footer-description">
+                        Agence de digitalisation spécialisée en solutions digitales innovantes, 
+                        branding et développement web & mobile.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/services">Social Media Management</a></li>
+                        <li><a href="/services">Branding & Identité</a></li>
+                        <li><a href="/services">Développement Web</a></li>
+                        <li><a href="/services">Applications Mobile</a></li>
+                        <li><a href="/services">Solutions IA</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="/about">À propos</a></li>
+                        <li><a href="/realisations">Réalisations</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/carrieres">Carrières</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Abidjan Cocody Angré Djorogobité<br>Côte d'Ivoire</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@windsit.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+225 07 78 13 72 32</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindsIT. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Project Modal (placeholder for future enhancement) -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProjectModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div id="modalContent">
+                <!-- Project details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/projects-data.js"></script>
+    <script>
+        function openProjectModal(projectId) {
+            const project = getProjectData(projectId);
+            
+            if (!project) {
+                console.error('Project not found:', projectId);
+                return;
+            }
+
+            const modal = document.getElementById('projectModal');
+            
+            if (!modal) {
+                console.error('Modal element not found');
+                return;
+            }
+            
+            modal.style.display = 'flex';
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Generate rich modal content
+            document.getElementById('modalContent').innerHTML = `
+                <div class="project-details">
+                    <span style="display: inline-block; padding: 0.5rem 1rem; background: var(--gradient-soft); color: var(--primary); border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 1rem;">
+                        ${project.category}
+                    </span>
+                    <h3>${project.title}</h3>
+                    
+                    <div class="project-meta">
+                        <div class="meta-item">
+                            <strong>Client</strong>
+                            <p>${project.client}</p>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Durée</strong>
+                            <p>${project.duration}</p>
+                        </div>
+                        <div class="meta-item">
+                            <strong>Année</strong>
+                            <p>${project.year}</p>
+                        </div>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <img src="${project.image}" alt="${project.title}" style="width: 100%; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.25rem; color: var(--dark); margin-bottom: 0.75rem;">Description</h4>
+                        <p style="color: var(--gray); line-height: 1.8;">${project.description}</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.25rem; color: var(--dark); margin-bottom: 0.75rem;">Le Défi</h4>
+                        <p style="color: var(--gray); line-height: 1.8;">${project.challenge}</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.25rem; color: var(--dark); margin-bottom: 0.75rem;">Notre Solution</h4>
+                        <p style="color: var(--gray); line-height: 1.8;">${project.solution}</p>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.25rem; color: var(--dark); margin-bottom: 1rem;">Livrables</h4>
+                        <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 0.75rem;">
+                            ${project.deliverables.map(item => `
+                                <li style="display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem; background: var(--light); border-radius: var(--radius-sm);">
+                                    <i class="fas fa-check-circle" style="color: var(--primary); margin-top: 2px; flex-shrink: 0;"></i>
+                                    <span style="color: var(--dark-light);">${item}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="results-list">
+                        <h4>Résultats</h4>
+                        <ul>
+                            ${project.results.map(result => `<li>${result}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div style="margin: 2rem 0;">
+                        <h4 style="font-size: 1.25rem; color: var(--dark); margin-bottom: 1rem;">Technologies Utilisées</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                            ${project.technologies.map(tech => `
+                                <span style="padding: 0.5rem 1rem; background: var(--gradient-soft); color: var(--primary); border-radius: 20px; font-size: 0.875rem; font-weight: 600;">
+                                    ${tech}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    ${project.testimonial ? `
+                        <div style="background: var(--gradient-soft); padding: 2rem; border-radius: var(--radius-lg); margin-top: 2rem; border-left: 4px solid var(--primary);">
+                            <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary); opacity: 0.5; margin-bottom: 1rem;"></i>
+                            <p style="font-style: italic; color: var(--dark-light); font-size: 1.125rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                                "${project.testimonial.text}"
+                            </p>
+                            <div style="display: flex; align-items: center; gap: 1rem;">
+                                <div style="width: 50px; height: 50px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                                    ${project.testimonial.author.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div>
+                                    <strong style="display: block; color: var(--dark);">${project.testimonial.author}</strong>
+                                    <span style="color: var(--gray); font-size: 0.875rem;">${project.testimonial.position}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <div style="margin-top: 3rem; text-align: center;">
+                        <a href="/contact" class="btn btn-primary btn-lg">
+                            Démarrer un projet similaire
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+
+            // Smooth scroll to top of modal
+            document.querySelector('.modal-content').scrollTop = 0;
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('projectModal');
+            modal.style.display = 'none';
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('projectModal');
+            if (event.target == modal) {
+                closeProjectModal();
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeProjectModal();
+            }
+        });
+
+        // Force reload images if they fail to load (cache issue)
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function() {
+                if (!this.dataset.retried) {
+                    this.dataset.retried = 'true';
+                    const timestamp = new Date().getTime();
+                    const src = this.src.split('?')[0]; // Remove existing query params
+                    this.src = src + '?v=' + timestamp;
+                    console.log('Retrying image load:', this.src);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

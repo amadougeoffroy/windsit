@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvrez tous nos services digitaux : Social Media, Branding, Web, Mobile, IA">
+    <title>Nos Services - WindsIT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-hero {
+            padding: 150px 0 100px;
+            background: var(--gradient-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .page-hero p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .services-detail {
+            margin-bottom: 5rem;
+        }
+        .service-detail-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 3rem;
+        }
+        .service-detail-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .service-detail-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--white);
+            flex-shrink: 0;
+        }
+        .service-detail-title {
+            font-size: 2rem;
+            margin: 0;
+        }
+        .service-features {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        @media (min-width: 768px) {
+            .service-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: var(--radius-sm);
+        }
+        .feature-item i {
+            color: var(--primary);
+            font-size: 1.25rem;
+            margin-top: 2px;
+        }
+        .pricing-section {
+            background: var(--light);
+            padding: 5rem 0;
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        @media (min-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .pricing-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+        }
+        .pricing-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+        }
+        .pricing-name {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .pricing-price span {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+        .pricing-features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">Winds<span>IT</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link" data-i18n="nav_home">Accueil</a></li>
+                <li><a href="/services" class="nav-link active" data-i18n="nav_services">Services</a></li>
+                <li><a href="/realisations" class="nav-link" data-i18n="nav_realisations">Réalisations</a></li>
+                <li><a href="/about" class="nav-link" data-i18n="nav_about">À propos</a></li>
+                <li><a href="/blog" class="nav-link" data-i18n="nav_blog">Blog</a></li>
+                <li><a href="/faq" class="nav-link">FAQ</a></li>
+                <li><a href="/contact" class="nav-link btn-nav" data-i18n="nav_contact">Contact</a></li>
+                <li class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSelector">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container text-center">
+            <span class="section-tag" data-aos="fade-up" data-i18n="services_hero_tag">Nos Services</span>
+            <h1 data-aos="fade-up" data-aos-delay="100"><span data-i18n="services_hero_title">Solutions</span> <span class="gradient-text" data-i18n="services_hero_title_gradient">digitales complètes</span></h1>
+            <p data-aos="fade-up" data-aos-delay="200" data-i18n="services_hero_subtitle">
+                De la stratégie à la réalisation, nous vous accompagnons dans votre transformation digitale
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Details -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Social Media Management -->
+            <div class="service-detail-card" data-aos="fade-up">
+                <div class="service-detail-header">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h2 class="service-detail-title">Social Media Management</h2>
+                </div>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Gestion complète de votre présence sur les réseaux sociaux pour renforcer votre image de marque et développer votre communauté.
+                </p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Stratégie de contenu personnalisée</strong>
+                            <p>Planification éditoriale adaptée à vos objectifs</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Création de contenus</strong>
+                            <p>Posts, stories, reels créatifs et engageants</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Community Management</strong>
+                            <p>Animation et modération quotidienne</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Publicité Social Ads</strong>
+                            <p>Campagnes Facebook, Instagram, LinkedIn optimisées</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Branding & Identité -->
+            <div class="service-detail-card" data-aos="fade-up">
+                <div class="service-detail-header">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h2 class="service-detail-title">Branding & Identité Visuelle</h2>
+                </div>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Création d'une identité visuelle forte et cohérente qui reflète les valeurs de votre entreprise et marque les esprits.
+                </p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Logo & Charte graphique</strong>
+                            <p>Design unique et mémorable</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Supports de communication</strong>
+                            <p>Cartes de visite, flyers, brochures</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Packaging Design</strong>
+                            <p>Emballages attractifs et fonctionnels</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Brand Guidelines</strong>
+                            <p>Manuel complet d'utilisation de la marque</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Développement Web -->
+            <div class="service-detail-card" data-aos="fade-up">
+                <div class="service-detail-header">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h2 class="service-detail-title">Développement de Site Internet</h2>
+                </div>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Conception et développement de sites web modernes, performants et optimisés pour tous les appareils.
+                </p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Sites Vitrines</strong>
+                            <p>Présentation élégante de votre activité</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>E-commerce</strong>
+                            <p>Boutiques en ligne performantes</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Optimisation SEO</strong>
+                            <p>Référencement naturel optimisé</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Responsive Design</strong>
+                            <p>Parfait sur tous les écrans</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Mobile -->
+            <div class="service-detail-card" data-aos="fade-up">
+                <div class="service-detail-header">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h2 class="service-detail-title">Développement d'Applications Mobile</h2>
+                </div>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Création d'applications mobiles natives et cross-platform pour iOS et Android avec expérience utilisateur exceptionnelle.
+                </p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Applications iOS & Android</strong>
+                            <p>Native ou cross-platform</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>UX/UI Design</strong>
+                            <p>Interface intuitive et moderne</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Publication Stores</strong>
+                            <p>App Store et Google Play</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Maintenance Continue</strong>
+                            <p>Mises à jour et support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solutions Personnalisées -->
+            <div class="service-detail-card" data-aos="fade-up">
+                <div class="service-detail-header">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h2 class="service-detail-title">Solutions Personnalisées (ERP, CRM)</h2>
+                </div>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Conception et développement de solutions logicielles sur mesure adaptées à vos besoins et processus spécifiques.
+                </p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>ERP Personnalisés</strong>
+                            <p>Gestion d'entreprise complète</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>CRM Sur Mesure</strong>
+                            <p>Gestion relation client optimisée</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Automatisation</strong>
+                            <p>Processus métier automatisés</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Intégrations</strong>
+                            <p>Connexion avec vos outils existants</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Solutions IA -->
+            <div class="service-detail-card" data-aos="fade-up">
+                <div class="service-detail-header">
+                    <div class="service-detail-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h2 class="service-detail-title">Spécialistes en Solutions IA</h2>
+                </div>
+                <p style="font-size: 1.125rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Intégration de l'intelligence artificielle dans vos processus pour optimiser vos performances et innover.
+                </p>
+                <div class="service-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Chatbots Intelligents</strong>
+                            <p>Support client automatisé 24/7</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Analyse Prédictive</strong>
+                            <p>Data science et machine learning</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Traitement Langage Naturel</strong>
+                            <p>Compréhension et génération de texte</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Vision par Ordinateur</strong>
+                            <p>Reconnaissance d'images et vidéos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Tarification</span>
+                <h2 class="section-title">Des formules <span class="gradient-text">adaptées</span> à vos besoins</h2>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card" data-aos="fade-up">
+                    <h3 class="pricing-name">Starter</h3>
+                    <div class="pricing-price">
+                        Sur devis
+                    </div>
+                    <p>Idéal pour démarrer votre présence digitale</p>
+                    <ul class="pricing-features">
+                        <li>✓ Site vitrine ou branding</li>
+                        <li>✓ Design personnalisé</li>
+                        <li>✓ Responsive mobile</li>
+                        <li>✓ SEO de base</li>
+                        <li>✓ 3 mois de support</li>
+                    </ul>
+                    <a href="/contact" class="btn btn-outline">Demander un devis</a>
+                </div>
+
+                <div class="pricing-card featured" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="pricing-name">Professional</h3>
+                    <div class="pricing-price">
+                        Sur devis
+                    </div>
+                    <p>Pour les entreprises en croissance</p>
+                    <ul class="pricing-features">
+                        <li>✓ Tout du plan Starter</li>
+                        <li>✓ E-commerce ou app mobile</li>
+                        <li>✓ Intégrations avancées</li>
+                        <li>✓ Marketing digital</li>
+                        <li>✓ 6 mois de support</li>
+                        <li>✓ Formation équipe</li>
+                    </ul>
+                    <a href="/contact" class="btn btn-primary">Demander un devis</a>
+                </div>
+
+                <div class="pricing-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="pricing-name">Enterprise</h3>
+                    <div class="pricing-price">
+                        Sur devis
+                    </div>
+                    <p>Solutions sur mesure pour grandes entreprises</p>
+                    <ul class="pricing-features">
+                        <li>✓ Tout du plan Professional</li>
+                        <li>✓ Solutions IA personnalisées</li>
+                        <li>✓ ERP/CRM sur mesure</li>
+                        <li>✓ Accompagnement dédié</li>
+                        <li>✓ Support prioritaire</li>
+                        <li>✓ SLA garanti</li>
+                    </ul>
+                    <a href="/contact" class="btn btn-outline">Nous contacter</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta section-padding">
+        <div class="cta-background"></div>
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2>Un projet en tête ?</h2>
+                <p>Discutons de vos besoins et trouvons la solution parfaite ensemble</p>
+                <div class="cta-buttons">
+                    <a href="/contact" class="btn btn-white btn-lg">
+                        Demander un devis gratuit
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>Winds<span>IT</span></h3>
+                    </div>
+                    <p class="footer-description">
+                        Agence de digitalisation spécialisée en solutions digitales innovantes, 
+                        branding et développement web & mobile.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/services">Social Media Management</a></li>
+                        <li><a href="/services">Branding & Identité</a></li>
+                        <li><a href="/services">Développement Web</a></li>
+                        <li><a href="/services">Applications Mobile</a></li>
+                        <li><a href="/services">Solutions IA</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="/about">À propos</a></li>
+                        <li><a href="/realisations">Réalisations</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/carrieres">Carrières</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Abidjan Cocody Angré Djorogobité<br>Côte d'Ivoire</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@windsit.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+225 07 78 13 72 32</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindsIT. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
