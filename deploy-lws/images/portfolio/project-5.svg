@@ -1,0 +1,43 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-project5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7931E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E63946;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#grad-project5)" opacity="0.1"/>
+  
+  <!-- Decorative shapes -->
+  <circle cx="150" cy="80" r="60" fill="#F7931E" opacity="0.2"/>
+  <circle cx="650" cy="520" r="80" fill="#FF6B35" opacity="0.2"/>
+  <rect x="600" y="80" width="100" height="100" fill="#E63946" opacity="0.15" rx="15"/>
+  
+  <!-- ERP/Dashboard icon -->
+  <g transform="translate(200, 180)">
+    <!-- Computer screen -->
+    <rect x="50" y="20" width="300" height="180" fill="none" stroke="#FF6B35" stroke-width="8" rx="10"/>
+    
+    <!-- Dashboard elements -->
+    <rect x="70" y="40" width="120" height="60" fill="#F7931E" opacity="0.3" rx="5"/>
+    <rect x="210" y="40" width="120" height="60" fill="#E63946" opacity="0.3" rx="5"/>
+    
+    <rect x="70" y="120" width="80" height="60" fill="#FF6B35" opacity="0.3" rx="5"/>
+    <rect x="170" y="120" width="80" height="60" fill="#F7931E" opacity="0.3" rx="5"/>
+    <rect x="270" y="120" width="60" height="60" fill="#E63946" opacity="0.3" rx="5"/>
+    
+    <!-- Stand -->
+    <rect x="180" y="200" width="40" height="30" fill="#6c757d"/>
+    <rect x="150" y="230" width="100" height="10" fill="#6c757d" rx="5"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="450" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1a1a2e" text-anchor="middle">
+    ERP Sur Mesure
+  </text>
+  <text x="400" y="490" font-family="Arial, sans-serif" font-size="20" fill="#6c757d" text-anchor="middle">
+    Gestion d'Entreprise
+  </text>
+</svg>

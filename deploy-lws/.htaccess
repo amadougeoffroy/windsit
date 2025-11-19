@@ -1,0 +1,141 @@
+# Configuration Apache pour WindsIT
+# Serveur LWS
+
+# ====================================
+# 1. PERFORMANCE & CACHE
+# ====================================
+
+# Activer la compression Gzip
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Cache des fichiers statiques
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # CSS et JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    
+    # Fonts
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType application/font-woff "access plus 1 year"
+    ExpiresByType application/font-woff2 "access plus 1 year"
+    
+    # Documents
+    ExpiresByType application/pdf "access plus 1 month"
+    
+    # HTML
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+# ====================================
+# 2. SÉCURITÉ
+# ====================================
+
+# Désactiver l'affichage des répertoires
+Options -Indexes
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|sql|json)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Headers de sécurité
+<IfModule mod_headers.c>
+    # Protection XSS
+    Header set X-XSS-Protection "1; mode=block"
+    
+    # Protection contre le clickjacking
+    Header set X-Frame-Options "SAMEORIGIN"
+    
+    # Protection contre le sniffing MIME
+    Header set X-Content-Type-Options "nosniff"
+    
+    # Politique de référent
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Content Security Policy (à ajuster selon vos besoins)
+    Header set Content-Security-Policy "default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;"
+</IfModule>
+
+# ====================================
+# 3. REDIRECTIONS & URL REWRITING
+# ====================================
+
+# Activer le module de réécriture
+RewriteEngine On
+
+# Forcer HTTPS (si vous avez un certificat SSL)
+# Décommenter les lignes ci-dessous une fois le SSL activé
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Rediriger www vers non-www (ou inversement)
+# Option A : Rediriger www vers non-www
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Option B : Rediriger non-www vers www
+# RewriteCond %{HTTP_HOST} !^www\. [NC]
+# RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+
+# Pages d'erreur personnalisées (créer ces fichiers si nécessaire)
+# ErrorDocument 404 /404.html
+# ErrorDocument 500 /500.html
+
+# ====================================
+# 4. TYPE MIME
+# ====================================
+
+<IfModule mod_mime.c>
+    # Fonts
+    AddType font/woff .woff
+    AddType font/woff2 .woff2
+    AddType application/vnd.ms-fontobject .eot
+    AddType font/ttf .ttf
+    AddType font/otf .otf
+    
+    # SVG
+    AddType image/svg+xml .svg .svgz
+    
+    # JavaScript
+    AddType application/javascript .js
+    AddType application/json .json
+    
+    # Vidéos
+    AddType video/mp4 .mp4
+    AddType video/webm .webm
+</IfModule>
+
+# ====================================
+# 5. ENCODAGE
+# ====================================
+
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+    AddCharset UTF-8 .html .css .js .xml .json .rss .atom
+</IfModule>
+
+# ====================================
+# 6. MAINTENANCE (optionnel)
+# ====================================
+
+# Mode maintenance - décommenter pour activer
+# RewriteEngine On
+# RewriteCond %{REMOTE_ADDR} !^123\.123\.123\.123
+# RewriteCond %{REQUEST_URI} !/maintenance.html$
+# RewriteRule ^(.*)$ /maintenance.html [R=302,L]
+

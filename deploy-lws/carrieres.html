@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rejoignez l'équipe WindsIT - Carrières et candidatures spontanées">
+    <title>Carrières - WindsIT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .page-hero {
+            padding: 150px 0 100px;
+            background: var(--gradient-soft);
+        }
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .careers-intro {
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+        .careers-intro p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .application-form h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        .form-group label .required {
+            color: var(--primary);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-input-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--light);
+            border: 2px dashed var(--gray);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .file-input-label:hover {
+            border-color: var(--primary);
+            background: var(--gradient-soft);
+        }
+        .file-input-label i {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        .file-name {
+            margin-top: 0.5rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--gradient);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            .application-form {
+                padding: 2rem 1.5rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">Winds<span>IT</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link" data-i18n="nav_home">Accueil</a></li>
+                <li><a href="/services" class="nav-link" data-i18n="nav_services">Services</a></li>
+                <li><a href="/realisations" class="nav-link" data-i18n="nav_realisations">Réalisations</a></li>
+                <li><a href="/about" class="nav-link" data-i18n="nav_about">À propos</a></li>
+                <li><a href="/blog" class="nav-link" data-i18n="nav_blog">Blog</a></li>
+                <li><a href="/faq" class="nav-link">FAQ</a></li>
+                <li><a href="/contact" class="nav-link btn-nav" data-i18n="nav_contact">Contact</a></li>
+                <li class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSelector">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container text-center">
+            <span class="section-tag" data-aos="fade-up" data-i18n="careers_hero_tag">Carrières</span>
+            <h1 data-aos="fade-up" data-aos-delay="100"><span data-i18n="careers_hero_title">Rejoignez</span> <span class="gradient-text" data-i18n="careers_hero_title_gradient">l'équipe WindsIT</span></h1>
+            <p data-aos="fade-up" data-aos-delay="200" style="font-size: 1.25rem; color: var(--gray); max-width: 600px; margin: 0 auto;" data-i18n="careers_hero_subtitle">
+                Participez à des projets innovants et développez vos compétences au sein d'une équipe passionnée
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Introduction -->
+            <div class="careers-intro" data-aos="fade-up">
+                <p>
+                    Chez <strong>WindsIT</strong>, nous croyons que notre succès repose sur la qualité et la passion de notre équipe. 
+                    Nous recherchons constamment des talents créatifs, innovants et motivés pour nous rejoindre dans notre mission 
+                    de transformer les idées en solutions digitales exceptionnelles.
+                </p>
+                <p>
+                    Que vous soyez développeur, designer, chef de projet ou spécialiste en marketing digital, 
+                    nous sommes toujours intéressés par des profils talentueux. Si vous êtes passionné par le digital 
+                    et que vous souhaitez évoluer dans un environnement dynamique et stimulant, envoyez-nous votre candidature !
+                </p>
+            </div>
+
+            <!-- Application Form -->
+            <div class="application-form" data-aos="fade-up" data-aos-delay="100">
+                <h3><i class="fas fa-paper-plane" style="color: var(--primary); margin-right: 1rem;"></i><span data-i18n="careers_form_title">Candidature Spontanée</span></h3>
+                
+                <form id="applicationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prenom"><span data-i18n="careers_form_firstname">Prénom</span> <span class="required">*</span></label>
+                            <input type="text" id="prenom" name="prenom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="nom"><span data-i18n="careers_form_lastname">Nom</span> <span class="required">*</span></label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email"><span data-i18n="careers_form_email">Email</span> <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telephone"><span data-i18n="careers_form_phone">Téléphone</span> <span class="required">*</span></label>
+                            <input type="tel" id="telephone" name="telephone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="poste"><span data-i18n="careers_form_position">Poste souhaité</span> <span class="required">*</span></label>
+                        <select id="poste" name="poste" required>
+                            <option value="" data-i18n="careers_form_position_select">Sélectionnez un domaine</option>
+                            <option value="developpement-web">Développement Web</option>
+                            <option value="developpement-mobile">Développement Mobile</option>
+                            <option value="design-ui-ux">Design UI/UX</option>
+                            <option value="branding">Branding & Identité Visuelle</option>
+                            <option value="social-media">Social Media Management</option>
+                            <option value="chef-projet">Chef de Projet Digital</option>
+                            <option value="marketing-digital">Marketing Digital</option>
+                            <option value="data-ia">Data Science & IA</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="linkedin"><span data-i18n="careers_form_linkedin">Profil LinkedIn</span></label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/votre-profil">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message"><span data-i18n="careers_form_message">Message de motivation</span> <span class="required">*</span></label>
+                        <textarea id="message" name="message" required data-i18n="careers_form_message_placeholder" placeholder="Parlez-nous de vous, de vos compétences et de ce qui vous motive à rejoindre WindsIT..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label><span data-i18n="careers_form_cv">CV (PDF, max 5Mo)</span> <span class="required">*</span></label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="cv" name="cv" accept=".pdf" required>
+                            <label for="cv" class="file-input-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span data-i18n="careers_form_cv_upload">Cliquez pour télécharger votre CV</span>
+                            </label>
+                            <div class="file-name" id="cvFileName"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label><span data-i18n="careers_form_portfolio">Portfolio / Lettre de motivation (PDF, optionnel)</span></label>
+                        <div class="file-input-wrapper">
+                            <input type="file" id="portfolio" name="portfolio" accept=".pdf">
+                            <label for="portfolio" class="file-input-label">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span data-i18n="careers_form_portfolio_upload">Cliquez pour télécharger un document supplémentaire</span>
+                            </label>
+                            <div class="file-name" id="portfolioFileName"></div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        <span data-i18n="careers_form_submit">Envoyer ma candidature</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>Winds<span>IT</span></h3>
+                    </div>
+                    <p class="footer-description">
+                        Agence de digitalisation spécialisée en solutions digitales innovantes, 
+                        branding et développement web & mobile.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/services">Social Media Management</a></li>
+                        <li><a href="/services">Branding & Identité</a></li>
+                        <li><a href="/services">Développement Web</a></li>
+                        <li><a href="/services">Applications Mobile</a></li>
+                        <li><a href="/services">Solutions IA</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="/about">À propos</a></li>
+                        <li><a href="/realisations">Réalisations</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/carrieres">Carrières</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Abidjan Cocody Angré Djorogobité<br>Côte d'Ivoire</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@windsit.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+225 07 78 13 72 32</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindsIT. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // File input handling
+        document.getElementById('cv').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '';
+            document.getElementById('cvFileName').textContent = fileName ? `Fichier sélectionné : ${fileName}` : '';
+        });
+
+        document.getElementById('portfolio').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '';
+            document.getElementById('portfolioFileName').textContent = fileName ? `Fichier sélectionné : ${fileName}` : '';
+        });
+
+        // Form submission with Brevo API
+        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+            
+            // Créer un FormData pour gérer les fichiers
+            const formData = new FormData(this);
+            
+            try {
+                // Envoyer les données au backend
+                const response = await fetch('send-application.php', {
+                    method: 'POST',
+                    body: formData // FormData gère automatiquement les fichiers
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    // Show success notification
+                    showNotification(result.message, 'success');
+                    
+                    // Reset form
+                    this.reset();
+                    document.getElementById('cvFileName').textContent = '';
+                    document.getElementById('portfolioFileName').textContent = '';
+                } else {
+                    // Show error notification
+                    showNotification(result.message, 'error');
+                }
+            } catch (error) {
+                console.error('Erreur:', error);
+                showNotification('Une erreur est survenue lors de l\'envoi. Veuillez réessayer.', 'error');
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        });
+    </script>
+</body>
+</html>
+

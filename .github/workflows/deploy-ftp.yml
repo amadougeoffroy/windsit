@@ -1,0 +1,41 @@
+name: 🚀 Déploiement FTP WindsIT
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Permet de déclencher manuellement
+
+jobs:
+  deploy:
+    name: 📦 Déployer sur serveur LWS
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout du code
+        uses: actions/checkout@v4
+        
+      - name: 🚀 Déploiement FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+          protocol: ftp
+          local-dir: ./deploy-lws/
+          server-dir: ./
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            **/README.md
+            **/.github/**
+          
+      - name: ✅ Déploiement terminé
+        run: |
+          echo "🎉 Site WindsIT déployé avec succès !"
+          echo "🌐 URL: https://windsit-digital.com"
+

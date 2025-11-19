@@ -1,0 +1,288 @@
+╔═══════════════════════════════════════════════════════════════╗
+║  INSTRUCTIONS DE DÉPLOIEMENT - SITE WINDSIT SUR SERVEUR LWS  ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📅 Date : 19 novembre 2025
+🎯 Destination : Serveur LWS avec nom de domaine
+
+═══════════════════════════════════════════════════════════════
+1. PRÉREQUIS
+═══════════════════════════════════════════════════════════════
+
+✅ Compte LWS actif
+✅ Nom de domaine configuré
+✅ Accès FTP (identifiants reçus par email de LWS)
+✅ Client FTP installé (FileZilla recommandé)
+
+═══════════════════════════════════════════════════════════════
+2. TÉLÉCHARGER FILEZILLA (si pas déjà installé)
+═══════════════════════════════════════════════════════════════
+
+🔗 https://filezilla-project.org/download.php?type=client
+
+Téléchargez et installez FileZilla Client (GRATUIT)
+
+═══════════════════════════════════════════════════════════════
+3. CONNEXION FTP À VOTRE SERVEUR LWS
+═══════════════════════════════════════════════════════════════
+
+1. Ouvrir FileZilla
+
+2. Entrer vos identifiants LWS :
+   ┌────────────────────────────────────────────┐
+   │ Hôte :        ftp.votre-domaine.com        │
+   │               ou ftp.lws.fr                │
+   │ Utilisateur : votre_login_lws              │
+   │ Mot de passe : votre_mdp_lws               │
+   │ Port :        21 (ou 22 pour SFTP)         │
+   └────────────────────────────────────────────┘
+
+3. Cliquer sur "Connexion rapide"
+
+4. Si c'est votre première connexion :
+   - Acceptez le certificat SSL
+   - Faites "Toujours faire confiance"
+
+═══════════════════════════════════════════════════════════════
+4. STRUCTURE DU SERVEUR LWS
+═══════════════════════════════════════════════════════════════
+
+Une fois connecté, vous verrez à droite (Serveur distant) :
+
+📁 / (racine)
+   ├── 📁 www/              ← C'EST ICI !
+   ├── 📁 logs/
+   ├── 📁 tmp/
+   └── autres dossiers...
+
+⚠️  IMPORTANT : Tous vos fichiers doivent aller dans le dossier "www/"
+
+Double-cliquez sur "www/" pour entrer dedans.
+
+═══════════════════════════════════════════════════════════════
+5. UPLOAD DES FICHIERS
+═══════════════════════════════════════════════════════════════
+
+Dans FileZilla :
+
+GAUCHE (Local)              DROITE (Serveur distant)
+──────────────              ────────────────────────
+📁 deploy-lws/       ====>  📁 www/
+   ├── index.html              ├── index.html
+   ├── about.html              ├── about.html
+   ├── 📁 css/                 ├── 📁 css/
+   ├── 📁 js/                  ├── 📁 js/
+   ├── 📁 images/              ├── 📁 images/
+   └── ...                     └── ...
+
+ÉTAPES :
+
+1. À GAUCHE : Naviguez jusqu'au dossier "deploy-lws"
+
+2. À DROITE : Assurez-vous d'être dans le dossier "www/"
+   (Si des fichiers existants sont là, vous pouvez les supprimer)
+
+3. SÉLECTIONNER TOUS LES FICHIERS dans deploy-lws :
+   - Ctrl+A (Windows) ou Cmd+A (Mac)
+   - Clic droit > "Envoyer"
+   
+   OU simplement :
+   - Glissez-déposez tous les fichiers de gauche vers la droite
+
+4. ATTENDRE la fin du transfert
+   ⏱️  Durée : 2-5 minutes selon la connexion
+   
+   FileZilla affiche la progression en bas :
+   - "Fichiers en file d'attente"
+   - "Transfert réussi"
+
+═══════════════════════════════════════════════════════════════
+6. VÉRIFICATION POST-DÉPLOIEMENT
+═══════════════════════════════════════════════════════════════
+
+Une fois le transfert terminé, vérifiez dans www/ :
+
+✅ Fichiers à la racine (www/) :
+   - index.html
+   - about.html
+   - services.html
+   - realisations.html
+   - contact.html
+   - carrieres.html
+   - blog.html
+   - faq.html
+   - .htaccess (peut être invisible)
+
+✅ Dossiers (www/) :
+   - css/
+   - js/
+   - images/
+   - fonts/ (si existe)
+
+═══════════════════════════════════════════════════════════════
+7. TESTER LE SITE EN LIGNE
+═══════════════════════════════════════════════════════════════
+
+1. Ouvrir votre navigateur
+
+2. Aller sur votre nom de domaine :
+   🔗 http://www.votre-domaine.com
+
+3. CHECKLIST DE TEST :
+
+   ✅ Page d'accueil s'affiche
+   ✅ Navigation fonctionne (tous les liens)
+   ✅ Images s'affichent correctement
+   ✅ Vidéo de présentation fonctionne
+   ✅ Téléchargement du PDF fonctionne
+   ✅ Formulaire de contact s'affiche
+   ✅ Boutons de traduction fonctionnent (FR/EN/ES)
+   ✅ Page Réalisations s'affiche
+   ✅ Modal des projets s'ouvre (cliquez "Voir le projet")
+   ✅ Slider des partenaires anime
+   ✅ Responsive (testez sur mobile)
+
+4. Tester sur plusieurs appareils :
+   - Desktop (Chrome, Firefox, Safari)
+   - Mobile (iPhone, Android)
+   - Tablette
+
+═══════════════════════════════════════════════════════════════
+8. ACTIVER LE CERTIFICAT SSL (HTTPS) - IMPORTANT !
+═══════════════════════════════════════════════════════════════
+
+LWS offre un certificat SSL GRATUIT Let's Encrypt !
+
+1. Connectez-vous à votre espace client LWS
+
+2. Allez dans "Mes Services" > "Hébergements"
+
+3. Cliquez sur votre hébergement
+
+4. Dans le menu, cherchez "SSL / HTTPS"
+
+5. Activez "Let's Encrypt SSL" (GRATUIT)
+
+6. Attendez 10-30 minutes pour l'activation
+
+7. Une fois activé, décommenter dans .htaccess :
+   (via FTP, éditez le fichier .htaccess)
+   
+   Décommenter ces lignes :
+   # RewriteCond %{HTTPS} off
+   # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+8. Testez avec https://www.votre-domaine.com
+
+═══════════════════════════════════════════════════════════════
+9. CONFIGURATION DU FORMULAIRE DE CONTACT (BREVO)
+═══════════════════════════════════════════════════════════════
+
+⚠️  IMPORTANT : Vérifiez que votre clé API Brevo est configurée
+
+1. Ouvrez via FTP : www/js/main.js
+
+2. Cherchez la ligne avec votre clé API Brevo :
+   const BREVO_API_KEY = 'VOTRE_CLE_API';
+
+3. Si elle n'est pas là, ajoutez-la avec votre vraie clé API
+
+4. Testez le formulaire de contact :
+   - Remplissez le formulaire
+   - Envoyez un message de test
+   - Vérifiez votre boîte email
+
+═══════════════════════════════════════════════════════════════
+10. MISES À JOUR FUTURES
+═══════════════════════════════════════════════════════════════
+
+Pour mettre à jour votre site :
+
+1. Modifiez les fichiers en local dans "deploy-lws/"
+
+2. Reconnectez-vous en FTP
+
+3. Uploadez UNIQUEMENT les fichiers modifiés :
+   - Sélectionnez le(s) fichier(s) modifié(s)
+   - Glissez vers le serveur
+   - Confirmez le remplacement
+
+4. Videz le cache de votre navigateur (Ctrl+F5)
+
+5. Testez les modifications
+
+═══════════════════════════════════════════════════════════════
+11. MAINTENANCE & SAUVEGARDE
+═══════════════════════════════════════════════════════════════
+
+📦 SAUVEGARDES AUTOMATIQUES LWS
+   - LWS fait des sauvegardes quotidiennes automatiques
+   - Restauration possible depuis l'espace client
+
+💾 SAUVEGARDE LOCALE RECOMMANDÉE
+   - Gardez toujours une copie locale dans "deploy-lws/"
+   - Versionnez avec Git (déjà fait ✅)
+   - Faites des sauvegardes régulières
+
+🔧 MODE MAINTENANCE
+   - Pour activer : décommenter la section dans .htaccess
+   - Créez une page maintenance.html si nécessaire
+
+═══════════════════════════════════════════════════════════════
+12. SUPPORT & AIDE
+═══════════════════════════════════════════════════════════════
+
+🆘 PROBLÈMES COURANTS :
+
+❌ "Connexion FTP refusée"
+   → Vérifiez vos identifiants
+   → Essayez avec ftp.lws.fr au lieu de ftp.votre-domaine.com
+
+❌ "Images ne s'affichent pas"
+   → Vérifiez que le dossier images/ a bien été uploadé
+   → Permissions : 755 pour les dossiers, 644 pour les fichiers
+
+❌ "Page blanche"
+   → Vérifiez que index.html est bien à la racine de www/
+   → Consultez les logs d'erreur dans l'espace client LWS
+
+❌ "Formulaire ne fonctionne pas"
+   → Vérifiez la clé API Brevo dans js/main.js
+   → Testez depuis https:// (pas http://)
+
+📞 CONTACT LWS :
+   - Support : https://www.lws.fr/support.php
+   - Téléphone : 01 77 62 30 03
+   - Email : support@lws.fr
+   - Chat en ligne disponible
+
+═══════════════════════════════════════════════════════════════
+✅ CHECKLIST FINALE
+═══════════════════════════════════════════════════════════════
+
+Avant de fermer, vérifiez que :
+
+□ Tous les fichiers sont uploadés (voir la liste à l'étape 6)
+□ Site accessible via le navigateur
+□ Toutes les pages fonctionnent
+□ Images visibles
+□ Formulaire de contact testé
+□ Traductions fonctionnent
+□ Modal des projets s'ouvre
+□ Responsive vérifié (mobile/tablette)
+□ SSL activé (HTTPS)
+□ Clé API Brevo configurée
+□ Sauvegarde locale faite
+
+═══════════════════════════════════════════════════════════════
+
+🎉 FÉLICITATIONS !
+Votre site WindsIT est maintenant en ligne !
+
+═══════════════════════════════════════════════════════════════
+
+Pour toute question, référez-vous à ce guide ou contactez le
+support LWS.
+
+Bonne continuation ! 🚀
+

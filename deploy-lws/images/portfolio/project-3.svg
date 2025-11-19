@@ -1,0 +1,32 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad-project3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#F7931E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E63946;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#grad-project3)" opacity="0.1"/>
+  
+  <!-- Decorative shapes -->
+  <circle cx="200" cy="500" r="70" fill="#E63946" opacity="0.2"/>
+  <circle cx="600" cy="100" r="90" fill="#FF6B35" opacity="0.2"/>
+  
+  <!-- Mobile phone icon -->
+  <g transform="translate(300, 150)">
+    <rect x="50" y="0" width="100" height="200" fill="none" stroke="#FF6B35" stroke-width="8" rx="20"/>
+    <rect x="70" y="30" width="60" height="120" fill="#F7931E" opacity="0.3" rx="5"/>
+    <circle cx="100" cy="180" r="8" fill="#E63946"/>
+    <line x1="75" y1="15" x2="125" y2="15" stroke="#F7931E" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="400" y="420" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#1a1a2e" text-anchor="middle">
+    Application Mobile
+  </text>
+  <text x="400" y="460" font-family="Arial, sans-serif" font-size="20" fill="#6c757d" text-anchor="middle">
+    iOS &amp; Android
+  </text>
+</svg>

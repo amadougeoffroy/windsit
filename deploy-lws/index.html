@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WindsIT - Agence de digitalisation spécialisée en solutions digitales innovantes">
+    <title>WindsIT - Agence de Digitalisation</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Video Section */
+        .video-section {
+            position: relative;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: var(--transition);
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background: var(--dark);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Partners Section */
+        .partners-slider {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin: 3rem 0;
+        }
+
+        .partners-track {
+            display: flex;
+            gap: 4rem;
+            animation: scroll 30s linear infinite;
+            width: fit-content;
+        }
+
+        .partner-item {
+            flex-shrink: 0;
+            width: 180px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 1rem;
+            transition: var(--transition);
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+
+        .partner-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .partner-item svg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .partners-slider:hover .partners-track {
+            animation-play-state: paused;
+        }
+
+        @media (max-width: 768px) {
+            .partners-track {
+                gap: 2rem;
+                animation-duration: 20s;
+            }
+            
+            .partner-item {
+                width: 140px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+                <div class="logo">
+                <a href="/">Winds<span>IT</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link active" data-i18n="nav_home">Accueil</a></li>
+                <li><a href="/services" class="nav-link" data-i18n="nav_services">Services</a></li>
+                <li><a href="/realisations" class="nav-link" data-i18n="nav_realisations">Réalisations</a></li>
+                <li><a href="/about" class="nav-link" data-i18n="nav_about">À propos</a></li>
+                <li><a href="/blog" class="nav-link" data-i18n="nav_blog">Blog</a></li>
+                <li><a href="/faq" class="nav-link">FAQ</a></li>
+                <li><a href="/contact" class="nav-link btn-nav" data-i18n="nav_contact">Contact</a></li>
+                <li class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSelector">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <div class="animated-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+                <div class="shape shape-4"></div>
+            </div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-text" data-aos="fade-right">
+                <h1 class="hero-title">
+                    <span data-i18n="hero_title">Transformez vos</span> <span class="gradient-text" data-i18n="hero_title_gradient">idées en solutions digitales</span>
+                </h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">
+                    WindsIT est votre partenaire stratégique pour réussir votre transformation digitale. De la conception à la réalisation, nous donnons vie à vos projets avec expertise et créativité.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/contact" class="btn btn-primary">
+                        <span data-i18n="hero_cta_project">Démarrer un projet</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="/realisations" class="btn btn-outline">
+                        <span data-i18n="hero_cta_portfolio">Voir nos réalisations</span>
+                        <i class="fas fa-play"></i>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number"><span data-count="150">0</span>+</span>
+                        <span class="stat-label" data-i18n="hero_stat_projects">Projets réalisés</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number"><span data-count="98">0</span>%</span>
+                        <span class="stat-label" data-i18n="hero_stat_clients">Clients satisfaits</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number"><span data-count="5">0</span>+</span>
+                        <span class="stat-label" data-i18n="hero_stat_experience">Années d'expérience</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="fade-left">
+                <div class="floating-card card-1">
+                    <i class="fas fa-code"></i>
+                    <span>Développement</span>
+                </div>
+                <div class="floating-card card-2">
+                    <i class="fas fa-palette"></i>
+                    <span>Design</span>
+                </div>
+                <div class="floating-card card-3">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Marketing</span>
+                </div>
+                <div class="floating-card card-4">
+                    <i class="fas fa-robot"></i>
+                    <span>IA</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="mouse"></div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="video-section section-padding" style="background: var(--light);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag" data-i18n="video_tag">Découvrez WindsIT</span>
+                <h2 class="section-title"><span data-i18n="video_title">Notre</span> <span class="gradient-text">présentation</span></h2>
+                <p class="section-subtitle" data-i18n="video_subtitle">
+                    Découvrez qui nous sommes et comment nous transformons vos idées en succès digitaux
+                </p>
+            </div>
+            
+            <div class="video-container" data-aos="zoom-in" data-aos-delay="200">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/rw3mB5LLRwo" 
+                        title="Présentation WindsIT" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+            
+            <!-- Download Button -->
+            <div class="text-center" data-aos="fade-up" data-aos-delay="300" style="margin-top: 2rem;">
+                <a href="downloads/presentation-windsit.pdf" download="Presentation-WindsIT.pdf" class="btn btn-primary btn-lg">
+                    <i class="fas fa-download"></i>
+                    <span data-i18n="download_presentation">Télécharger la maquette de présentation</span>
+                </a>
+                <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                    <i class="fas fa-file-pdf" style="color: var(--primary);"></i>
+                    <span data-i18n="download_format">Format PDF • 537 KB</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-preview section-padding" id="services">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag" data-i18n="services_tag">Nos Expertises</span>
+                <h2 class="section-title"><span data-i18n="services_title">Services qui propulsent votre</span> <span class="gradient-text" data-i18n="services_title_gradient">croissance digitale</span></h2>
+                <p class="section-subtitle">
+                    Des solutions complètes et innovantes pour transformer votre entreprise
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3>Social Media Management</h3>
+                    <p>Stratégie de contenu, community management et publicité sur les réseaux sociaux pour maximiser votre visibilité.</p>
+                    <a href="services.html" class="service-link">
+                        En savoir plus <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Branding & Identité Visuelle</h3>
+                    <p>Création de logo, charte graphique et identité de marque forte qui marque les esprits et génère de la confiance.</p>
+                    <a href="services.html" class="service-link">
+                        En savoir plus <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Développement Web</h3>
+                    <p>Sites vitrines, e-commerce et applications web modernes, performants et optimisés pour tous les appareils.</p>
+                    <a href="services.html" class="service-link">
+                        En savoir plus <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Applications Mobile</h3>
+                    <p>Applications natives et cross-platform iOS/Android avec expérience utilisateur exceptionnelle.</p>
+                    <a href="services.html" class="service-link">
+                        En savoir plus <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Solutions Personnalisées</h3>
+                    <p>ERP, CRM et logiciels sur mesure adaptés à vos processus métier et besoins spécifiques.</p>
+                    <a href="services.html" class="service-link">
+                        En savoir plus <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Solutions IA</h3>
+                    <p>Chatbots intelligents, automatisation, analyse prédictive et intégration d'IA dans vos processus.</p>
+                    <a href="services.html" class="service-link">
+                        En savoir plus <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="services.html" class="btn btn-primary">
+                    Voir tous nos services
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview -->
+    <section class="portfolio-preview section-padding bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Portfolio</span>
+                <h2 class="section-title">Nos <span class="gradient-text">réalisations</span> récentes</h2>
+                <p class="section-subtitle">
+                    Découvrez quelques projets qui illustrent notre expertise et notre créativité
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-1.svg" alt="Projet 1">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Identité Visuelle</span>
+                                <h3 class="portfolio-title">Rebranding Complet</h3>
+                                <p>Création d'une nouvelle identité visuelle moderne et impactante</p>
+                                <a href="realisations.html" class="btn btn-sm btn-white">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-2.svg" alt="Projet 2">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Site E-commerce</span>
+                                <h3 class="portfolio-title">Boutique en Ligne</h3>
+                                <p>Site e-commerce avec +200% de conversion en 3 mois</p>
+                                <a href="realisations.html" class="btn btn-sm btn-white">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-3.svg" alt="Projet 3">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Application Mobile</span>
+                                <h3 class="portfolio-title">App iOS & Android</h3>
+                                <p>Application mobile avec 50k+ téléchargements</p>
+                                <a href="realisations.html" class="btn btn-sm btn-white">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-4.svg" alt="Projet 4">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Social Media</span>
+                                <h3 class="portfolio-title">Campagne Digital</h3>
+                                <p>+300% de followers et engagement multiplié par 2</p>
+                                <a href="realisations.html" class="btn btn-sm btn-white">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-5.svg" alt="Projet 5">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">ERP Sur Mesure</span>
+                                <h3 class="portfolio-title">Gestion d'Entreprise</h3>
+                                <p>Solution ERP avec 40% de gain de productivité</p>
+                                <a href="realisations.html" class="btn btn-sm btn-white">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="portfolio-image">
+                        <img src="images/portfolio/project-6.svg" alt="Projet 6">
+                        <div class="portfolio-overlay">
+                            <div class="portfolio-content">
+                                <span class="portfolio-category">Solution IA</span>
+                                <h3 class="portfolio-title">Chatbot Intelligent</h3>
+                                <p>Assistant virtuel avec IA pour service client 24/7</p>
+                                <a href="realisations.html" class="btn btn-sm btn-white">
+                                    Voir le projet <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="realisations.html" class="btn btn-primary">
+                    Voir toutes nos réalisations
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Notre Méthodologie</span>
+                <h2 class="section-title">Un processus <span class="gradient-text">éprouvé</span> pour votre succès</h2>
+            </div>
+
+            <div class="process-timeline">
+                <div class="process-step" data-aos="fade-right">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Découverte & Analyse</h3>
+                        <p>Compréhension approfondie de vos besoins, objectifs et contraintes pour définir la meilleure stratégie.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-left">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Stratégie & Planification</h3>
+                        <p>Élaboration d'un plan d'action détaillé avec roadmap, jalons et KPIs mesurables.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Design & Développement</h3>
+                        <p>Création et développement de solutions innovantes avec feedback régulier et itérations.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-left">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Tests & Optimisation</h3>
+                        <p>Tests rigoureux et optimisation pour garantir qualité, performance et sécurité.</p>
+                    </div>
+                </div>
+
+                <div class="process-step" data-aos="fade-right">
+                    <div class="step-number">05</div>
+                    <div class="step-content">
+                        <h3>Lancement & Support</h3>
+                        <p>Mise en ligne accompagnée d'un support continu, maintenance et formations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials section-padding bg-light">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Témoignages</span>
+                <h2 class="section-title">Ce que disent nos <span class="gradient-text">clients</span></h2>
+            </div>
+
+            <div class="testimonials-slider">
+                <div class="testimonial-card" data-aos="fade-up">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "WindsIT a transformé notre présence digitale. Leur expertise et professionnalisme 
+                        ont dépassé nos attentes. Une équipe réactive et innovante !"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="images/avatars/client-1.svg" alt="Client 1">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sophie Martin</h4>
+                            <span>CEO, TechStart</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Un partenaire de confiance pour notre transformation digitale. 
+                        ROI rapide et mesurable. Je recommande vivement !"
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="images/avatars/client-2.svg" alt="Client 2">
+                        </div>
+                        <div class="author-info">
+                            <h4>Marc Dubois</h4>
+                            <span>Directeur, Innovation Corp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Excellente collaboration ! WindsIT a su comprendre nos besoins et proposer 
+                        des solutions sur mesure parfaitement adaptées."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="images/avatars/client-3.svg" alt="Client 3">
+                        </div>
+                        <div class="author-info">
+                            <h4>Amélie Laurent</h4>
+                            <span>Marketing Manager, Fashion Co</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Partners Slider (No Title) -->
+            <div class="partners-slider" data-aos="fade-up" style="margin-top: 4rem;">
+                <div class="partners-track">
+                    <!-- Partner 1 -->
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="15" width="100" height="30" rx="5" fill="#FF6B35" opacity="0.2"/>
+                            <text x="60" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FF6B35">PARTNER 1</text>
+                        </svg>
+                    </div>
+                    <!-- Partner 2 -->
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="30" r="20" fill="#F7931E" opacity="0.2"/>
+                            <text x="60" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#F7931E">PARTNER 2</text>
+                        </svg>
+                    </div>
+                    <!-- Partner 3 -->
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="60,10 90,50 30,50" fill="#E63946" opacity="0.2"/>
+                            <text x="60" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#E63946">PARTNER 3</text>
+                        </svg>
+                    </div>
+                    <!-- Partner 4 -->
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="15" width="100" height="30" rx="15" fill="#FF6B35" opacity="0.2"/>
+                            <text x="60" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FF6B35">PARTNER 4</text>
+                        </svg>
+                    </div>
+                    <!-- Partner 5 -->
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="60" cy="30" rx="40" ry="20" fill="#F7931E" opacity="0.2"/>
+                            <text x="60" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#F7931E">PARTNER 5</text>
+                        </svg>
+                    </div>
+                    <!-- Partner 6 -->
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="20" y="20" width="80" height="20" rx="10" fill="#E63946" opacity="0.2"/>
+                            <text x="60" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#E63946">PARTNER 6</text>
+                        </svg>
+                    </div>
+                    <!-- Duplicate for infinite scroll -->
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="15" width="100" height="30" rx="5" fill="#FF6B35" opacity="0.2"/>
+                            <text x="60" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FF6B35">PARTNER 1</text>
+                        </svg>
+                    </div>
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="60" cy="30" r="20" fill="#F7931E" opacity="0.2"/>
+                            <text x="60" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#F7931E">PARTNER 2</text>
+                        </svg>
+                    </div>
+                    <div class="partner-item">
+                        <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="60,10 90,50 30,50" fill="#E63946" opacity="0.2"/>
+                            <text x="60" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#E63946">PARTNER 3</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta section-padding">
+        <div class="cta-background"></div>
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2 data-i18n="cta_title">Prêt à transformer votre entreprise ?</h2>
+                <p data-i18n="cta_subtitle">Contactez-nous pour une consultation gratuite et découvrez comment nous pouvons vous aider</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-white btn-lg">
+                        <span data-i18n="cta_button">Démarrer un projet</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="tel:+2250778137232" class="btn btn-outline-white btn-lg">
+                        <i class="fas fa-phone"></i>
+                        +225 07 78 13 72 32
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>Winds<span>IT</span></h3>
+                    </div>
+                    <p class="footer-description" data-i18n="footer_description">
+                        Agence de digitalisation spécialisée en solutions digitales innovantes, 
+                        branding et développement web & mobile.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 data-i18n="footer_services_title">Services</h4>
+                    <ul>
+                        <li><a href="/services">Social Media Management</a></li>
+                        <li><a href="/services">Branding & Identité</a></li>
+                        <li><a href="/services">Développement Web</a></li>
+                        <li><a href="/services">Applications Mobile</a></li>
+                        <li><a href="/services">Solutions IA</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 data-i18n="footer_company_title">Entreprise</h4>
+                    <ul>
+                        <li><a href="/about" data-i18n="nav_about">À propos</a></li>
+                        <li><a href="/realisations" data-i18n="nav_realisations">Réalisations</a></li>
+                        <li><a href="/contact" data-i18n="nav_contact">Contact</a></li>
+                        <li><a href="/carrieres" data-i18n="nav_careers">Carrières</a></li>
+                        <li><a href="/blog" data-i18n="nav_blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 data-i18n="footer_contact_title">Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Abidjan Cocody Angré Djorogobité<br>Côte d'Ivoire</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@windsit.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+225 07 78 13 72 32</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindsIT. <span data-i18n="footer_rights">Tous droits réservés.</span></p>
+                <div class="footer-links">
+                    <a href="#" data-i18n="footer_legal">Mentions légales</a>
+                    <a href="#" data-i18n="footer_privacy">Politique de confidentialité</a>
+                    <a href="#" data-i18n="footer_terms">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Force reload images if they fail to load (cache issue)
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function() {
+                if (!this.dataset.retried) {
+                    this.dataset.retried = 'true';
+                    const timestamp = new Date().getTime();
+                    const src = this.src.split('?')[0]; // Remove existing query params
+                    this.src = src + '?v=' + timestamp;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
