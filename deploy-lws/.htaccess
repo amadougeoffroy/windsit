@@ -83,19 +83,26 @@ RewriteBase /
 # URLs SANS EXTENSION .html
 # ====================================
 
-# Rediriger les URLs avec .html vers sans .html
+# Redirection page d'accueil
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.html [NC]
+RewriteRule ^index\.html$ / [R=301,L]
+
+# Rediriger les URLs avec .html vers sans .html (redirection permanente)
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.html [NC]
 RewriteRule ^ %1 [R=301,L]
 
 # Ajouter .html en interne pour les URLs sans extension
+# Ignore les fichiers et dossiers existants
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+# Si un fichier .html correspondant existe, l'utiliser
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+)$ $1.html [L,QSA]
 
-# Redirection page d'accueil
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.html [NC]
-RewriteRule ^index\.html$ / [R=301,L]
+# Forcer services.html si aucun dossier services n'existe
+RewriteCond %{REQUEST_URI} ^/services$
+RewriteCond %{DOCUMENT_ROOT}/services.html -f
+RewriteRule ^services$ /services.html [L]
 
 # Forcer HTTPS (si vous avez un certificat SSL)
 # Décommenter les lignes ci-dessous une fois le SSL activé
