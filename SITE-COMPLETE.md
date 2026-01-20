@@ -357,7 +357,7 @@ Modifier dans `css/style.css` lignes 15-25 :
 
 ### 4. Contact
 Remplacer dans tous les fichiers (footer + contact.html) :
-- Email : contact@windsit.com
+- Email : contact@windsit-digital.com
 - Téléphone : +33 1 23 45 67 89
 - Adresse : 123 Avenue des Champs-Élysées, 75008 Paris
 

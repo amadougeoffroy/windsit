@@ -8,9 +8,9 @@ Retirer l'extension `.html` des URLs pour avoir des URLs plus propres et profess
 
 | Avant | Après |
 |-------|-------|
-| `windsit.com/services.html` | `windsit.com/services` |
-| `windsit.com/about.html` | `windsit.com/about` |
-| `windsit.com/contact.html` | `windsit.com/contact` |
+| `windsit-digital.com/services.html` | `windsit-digital.com/services` |
+| `windsit-digital.com/about.html` | `windsit-digital.com/about` |
+| `windsit-digital.com/contact.html` | `windsit-digital.com/contact` |
 
 ## Configuration
 
@@ -29,7 +29,7 @@ Si vous utilisez Nginx au lieu d'Apache, créez un fichier `nginx.conf` :
 ```nginx
 server {
     listen 80;
-    server_name windsit.com www.windsit.com;
+    server_name windsit-digital.com www.windsit-digital.com;
     root /var/www/html;
     index index.html;
 
@@ -128,7 +128,7 @@ apache2ctl configtest
 ### VPS / Serveur dédié (Nginx)
 ```bash
 # Éditer la configuration
-sudo nano /etc/nginx/sites-available/windsit.com
+sudo nano /etc/nginx/sites-available/windsit-digital.com
 
 # Tester la configuration
 sudo nginx -t

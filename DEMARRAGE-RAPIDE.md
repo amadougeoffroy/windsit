@@ -73,7 +73,7 @@ Puis ouvrir : http://localhost:8000
 
 ### 1. Coordonnées de Contact
 Chercher et remplacer dans **tous les fichiers** :
-- `contact@windsit.com` → Votre email
+- `contact@windsit-digital.com` → Votre email
 - `+33 1 23 45 67 89` → Votre téléphone
 - `123 Avenue des Champs-Élysées, 75008 Paris` → Votre adresse
 

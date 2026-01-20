@@ -48,24 +48,24 @@ Protège les fichiers sensibles (config.php notamment)
 
 ### ⚠️ À FAIRE : Configurer l'email professionnel
 
-**Pour utiliser `contact@windsit.com` :**
+**Pour utiliser `contact@windsit-digital.com` :**
 
 1. **Créer l'email dans Brevo :**
    - Connectez-vous sur https://app.brevo.com
    - Allez dans **Expéditeurs** → **Ajouter un expéditeur**
-   - Ajoutez `contact@windsit.com`
+   - Ajoutez `contact@windsit-digital.com`
    - Vérifiez l'email (cliquez sur le lien envoyé)
 
 2. **Mettre à jour config.php :**
    ```php
-   define('EMAIL_FROM', 'contact@windsit.com');
+   define('EMAIL_FROM', 'contact@windsit-digital.com');
    ```
 
 3. **Alternative : Utiliser un domaine**
    - Allez dans **Expéditeurs** → **Domaines**
-   - Ajoutez `windsit.com`
+   - Ajoutez `windsit-digital.com`
    - Configurez les enregistrements DNS (SPF, DKIM, DMARC)
-   - Cela permet d'envoyer depuis n'importe quelle adresse @windsit.com
+   - Cela permet d'envoyer depuis n'importe quelle adresse @windsit-digital.com
 
 ---
 
@@ -244,7 +244,7 @@ post_max_size = 10M
 1. **Vérifier config.php**
    - Mettre la bonne URL du site
    - Ajouter le domaine de production dans ALLOWED_ORIGINS
-   - Configurer contact@windsit.com si disponible
+   - Configurer contact@windsit-digital.com si disponible
 
 2. **Vérifier .gitignore**
    - config.php doit être ignoré
@@ -264,7 +264,7 @@ chmod 644 config.php
 chmod 644 send-*.php
 
 # 4. Tester
-curl -X POST https://windsit.com/send-contact.php \
+curl -X POST https://windsit-digital.com/send-contact.php \
   -H "Content-Type: application/json" \
   -d '{"name":"Test","email":"test@test.com","phone":"123","subject":"Test","message":"Test"}'
 ```

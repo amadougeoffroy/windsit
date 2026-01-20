@@ -100,7 +100,7 @@ Remplacez dans tous les fichiers HTML (footer et contact.html) :
 123 Avenue des Champs-Élysées, 75008 Paris
 
 <!-- Email -->
-contact@windsit.com
+contact@windsit-digital.com
 
 <!-- Téléphone -->
 +33 1 23 45 67 89
@@ -413,7 +413,7 @@ Le site respecte les standards WCAG :
 
 Pour toute question ou problème :
 
-- 📧 Email : contact@windsit.com
+- 📧 Email : contact@windsit-digital.com
 - 💬 Issues GitHub : [Créer une issue]
 - 📱 Téléphone : +33 1 23 45 67 89
 
