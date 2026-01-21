@@ -6,6 +6,7 @@ const articleData = {
         date: '20 Janvier 2026',
         readTime: 6,
         icon: 'fas fa-brain',
+        image: 'images/assistant-ai.jpg',
         content: `
             <p>
                 L'intelligence artificielle évolue à une vitesse fulgurante. En 2026, nous assistons à l'émergence 
@@ -102,6 +103,7 @@ const articleData = {
         date: '15 Janvier 2026',
         readTime: 8,
         icon: 'fas fa-vr-cardboard',
+        image: 'images/virtual-shop.jpg',
         content: `
             <p>
                 Le Web3 et les technologies immersives redéfinissent complètement l'expérience d'achat en ligne. 
@@ -170,6 +172,7 @@ const articleData = {
         date: '10 Janvier 2026',
         readTime: 7,
         icon: 'fas fa-mobile-alt',
+        image: 'images/app-pwa.jpg',
         content: `
             <p>
                 Le débat entre applications natives et Progressive Web Apps (PWA) a évolué significativement en 2026. 
@@ -233,6 +236,7 @@ const articleData = {
         date: '5 Janvier 2026',
         readTime: 9,
         icon: 'fas fa-shield-alt',
+        image: 'images/quantique.jpg',
         content: `
             <p>
                 Les ordinateurs quantiques représentent une révolution technologique majeure, mais ils menacent également 
@@ -285,6 +289,7 @@ const articleData = {
         date: '30 Décembre 2025',
         readTime: 6,
         icon: 'fas fa-chart-line',
+        image: 'images/seo.jpg',
         content: `
             <p>
                 Le référencement naturel évolue rapidement avec l'émergence de la recherche vocale et des assistants IA. 
@@ -331,6 +336,7 @@ const articleData = {
         date: '25 Décembre 2025',
         readTime: 10,
         icon: 'fas fa-laptop-code',
+        image: 'images/search.jpg',
         content: `
             <p>
                 WebAssembly 2.0 marque une étape majeure dans l'évolution du web. Avec de nouvelles fonctionnalités comme 
@@ -382,6 +388,7 @@ const articleData = {
         date: '20 Décembre 2025',
         readTime: 7,
         icon: 'fas fa-paint-brush',
+        image: 'images/design.jpg',
         content: `
             <p>
                 Les interfaces intelligentes qui s'adaptent en temps réel aux préférences et comportements des utilisateurs 
@@ -427,6 +434,7 @@ const articleData = {
         date: '15 Décembre 2025',
         readTime: 8,
         icon: 'fas fa-users',
+        image: 'images/social.jpg',
         content: `
             <p>
                 Les plateformes sociales intègrent désormais des fonctionnalités de commerce complet, transformant les 
@@ -471,6 +479,7 @@ const articleData = {
         date: '10 Décembre 2025',
         readTime: 6,
         icon: 'fas fa-rocket',
+        image: 'images/performance.jpg',
         content: `
             <p>
                 Le edge computing apporte le traitement des données plus près des utilisateurs, réduisant la latence et 

@@ -78,20 +78,28 @@
         .article-featured-image {
             width: 100%;
             height: 500px;
-            background: var(--gradient);
             border-radius: var(--radius-lg);
             margin: 3rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
             overflow: hidden;
+            background: var(--gradient);
+        }
+        
+        .article-featured-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
         }
         
         .article-featured-image i {
             font-size: 8rem;
             color: var(--white);
             opacity: 0.3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         
         .article-content-wrapper {
@@ -355,12 +363,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .related-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .related-card-image i {
             font-size: 3rem;
             color: var(--white);
             opacity: 0.5;
+            position: absolute;
         }
         
         .related-card-content {
@@ -484,7 +501,8 @@
     <section>
         <div class="container">
             <div class="article-featured-image" id="articleFeaturedImage" data-aos="fade-up">
-                <i class="fas fa-brain"></i>
+                <img id="articleFeaturedImg" src="" alt="" style="display: none;">
+                <i id="articleFeaturedIcon" class="fas fa-brain"></i>
             </div>
         </div>
     </section>
@@ -634,39 +652,8 @@
     <section class="related-articles">
         <div class="container">
             <h3 data-aos="fade-up">Articles similaires</h3>
-            <div class="related-grid">
-                <div class="related-card" data-aos="fade-up">
-                    <div class="related-card-image">
-                        <i class="fas fa-vr-cardboard"></i>
-                    </div>
-                    <div class="related-card-content">
-                        <h4>Web3 et expériences immersives</h4>
-                        <p>Découvrez comment le Web3 transforme le commerce digital avec des expériences immersives...</p>
-                        <a href="/article?slug=web3-experiences-immersives">Lire l'article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                
-                <div class="related-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="related-card-image">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <div class="related-card-content">
-                        <h4>Applications natives vs PWA</h4>
-                        <p>Comparaison approfondie entre applications natives et Progressive Web Apps en 2026...</p>
-                        <a href="/article?slug=pwa-vs-native">Lire l'article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-                
-                <div class="related-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="related-card-image">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div class="related-card-content">
-                        <h4>Sécurité post-quantique</h4>
-                        <p>Préparez votre infrastructure pour l'ère quantique avec les algorithmes post-quantiques...</p>
-                        <a href="/article?slug=securite-post-quantique">Lire l'article <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
+            <div class="related-grid" id="relatedArticlesGrid">
+                <!-- Articles similaires chargés dynamiquement -->
             </div>
         </div>
     </section>
@@ -794,15 +781,58 @@
             document.getElementById('articleDate').textContent = data.date;
             document.getElementById('articleReadTime').textContent = data.readTime + ' min de lecture';
             
-            // Update featured image icon
-            const featuredImage = document.getElementById('articleFeaturedImage');
-            featuredImage.innerHTML = `<i class="${data.icon}"></i>`;
+            // Update featured image
+            const featuredImg = document.getElementById('articleFeaturedImg');
+            const featuredIcon = document.getElementById('articleFeaturedIcon');
+            if (data.image) {
+                featuredImg.src = data.image;
+                featuredImg.alt = data.title;
+                featuredImg.style.display = 'block';
+                featuredIcon.style.display = 'none';
+            } else {
+                featuredIcon.className = data.icon;
+                featuredIcon.style.display = 'flex';
+                featuredImg.style.display = 'none';
+            }
             
             // Update content
             document.getElementById('articleContent').innerHTML = data.content;
             
             // Update page title
             document.title = data.title + ' - WindsIT';
+            
+            // Load related articles
+            loadRelatedArticles(data.slug || '');
+        }
+        
+        function loadRelatedArticles(currentSlug) {
+            if (!articleData) return;
+            
+            const allArticles = Object.keys(articleData).filter(slug => slug !== currentSlug);
+            const relatedSlugs = allArticles.slice(0, 3);
+            const grid = document.getElementById('relatedArticlesGrid');
+            
+            if (!grid) return;
+            
+            grid.innerHTML = relatedSlugs.map((slug, index) => {
+                const article = articleData[slug];
+                const imageHtml = article.image 
+                    ? `<img src="${article.image}" alt="${article.title}">`
+                    : `<i class="${article.icon}"></i>`;
+                
+                return `
+                    <div class="related-card" data-aos="fade-up" data-aos-delay="${index * 100}">
+                        <div class="related-card-image">
+                            ${imageHtml}
+                        </div>
+                        <div class="related-card-content">
+                            <h4>${article.title}</h4>
+                            <p>${article.content.substring(0, 100)}...</p>
+                            <a href="/article?slug=${slug}">Lire l'article <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
         }
     </script>
 </body>
