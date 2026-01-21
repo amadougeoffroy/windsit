@@ -198,8 +198,23 @@ footer {
     max-width: 100% !important;
 }
 
-video,
-iframe {
+.video-wrapper {
+    width: 100% !important;
+    position: relative !important;
+    padding-bottom: 56.25% !important; /* 16:9 aspect ratio */
+    height: 0 !important;
+}
+
+.video-wrapper iframe {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+}
+
+video {
     max-width: 100% !important;
     height: auto !important;
 }
@@ -247,4 +262,5 @@ iframe {
 .debug-overflow * {
     outline: 1px solid red !important;
 }
+
 
