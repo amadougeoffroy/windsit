@@ -45,10 +45,21 @@
             position: relative;
             overflow: hidden;
         }
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
         .blog-image i {
             font-size: 4rem;
             color: var(--primary);
             opacity: 0.3;
+            position: absolute;
+            z-index: 1;
+            display: none; /* Caché quand l'image est présente */
         }
         .blog-category {
             position: absolute;
