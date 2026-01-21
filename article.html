@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Article WindsIT - Découvrez nos analyses approfondies sur les tendances digitales">
+    <title>Article - WindsIT</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Article Detail Page Styles */
+        .article-hero {
+            padding: 120px 0 60px;
+            background: var(--gradient-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient);
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        .article-hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .article-category {
+            display: inline-block;
+            background: var(--gradient);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-title {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+        
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .article-meta-item i {
+            color: var(--primary);
+        }
+        
+        .article-featured-image {
+            width: 100%;
+            height: 500px;
+            background: var(--gradient);
+            border-radius: var(--radius-lg);
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .article-featured-image i {
+            font-size: 8rem;
+            color: var(--white);
+            opacity: 0.3;
+        }
+        
+        .article-content-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+        
+        .article-content {
+            font-size: 1.125rem;
+            line-height: 1.9;
+            color: var(--dark-light);
+        }
+        
+        .article-content h2 {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-left: 1rem;
+        }
+        
+        .article-content h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--dark);
+        }
+        
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .article-content ul,
+        .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            background: var(--gradient-soft);
+            border-radius: var(--radius-md);
+            font-style: italic;
+            font-size: 1.25rem;
+            color: var(--dark);
+        }
+        
+        .article-content code {
+            background: var(--gray-light);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+        
+        .article-content pre {
+            background: var(--dark);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        
+        .article-content img {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            margin: 2rem 0;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 3rem 0;
+        }
+        
+        .article-tag {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .article-tag:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .article-author {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            margin: 4rem 0;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .author-avatar i {
+            font-size: 2.5rem;
+            color: var(--white);
+        }
+        
+        .author-info h4 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .author-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+        
+        .author-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .author-social a {
+            width: 40px;
+            height: 40px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .author-social a:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+        
+        .article-share {
+            background: var(--gradient-soft);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .article-share h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .share-btn-facebook {
+            background: #1877F2;
+            color: var(--white);
+        }
+        
+        .share-btn-twitter {
+            background: #1DA1F2;
+            color: var(--white);
+        }
+        
+        .share-btn-linkedin {
+            background: #0077B5;
+            color: var(--white);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .related-articles {
+            background: var(--light);
+            padding: 4rem 0;
+        }
+        
+        .related-articles h3 {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--dark);
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .related-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+        
+        .related-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .related-card-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .related-card-image i {
+            font-size: 3rem;
+            color: var(--white);
+            opacity: 0.5;
+        }
+        
+        .related-card-content {
+            padding: 1.5rem;
+        }
+        
+        .related-card-content h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .related-card-content p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .related-card-content a {
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 2rem;
+            }
+            
+            .article-featured-image {
+                height: 300px;
+            }
+            
+            .article-content-wrapper {
+                padding: 2rem 0;
+            }
+            
+            .article-content {
+                font-size: 1rem;
+            }
+            
+            .article-content h2 {
+                font-size: 1.75rem;
+            }
+            
+            .article-author {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+            }
+            
+            .share-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="/">Winds<span>IT</span></a>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="/" class="nav-link" data-i18n="nav_home">Accueil</a></li>
+                <li><a href="/nos-services" class="nav-link" data-i18n="nav_services">Services</a></li>
+                <li><a href="/realisations" class="nav-link" data-i18n="nav_realisations">Réalisations</a></li>
+                <li><a href="/about" class="nav-link" data-i18n="nav_about">À propos</a></li>
+                <li><a href="/blog" class="nav-link active" data-i18n="nav_blog">Blog</a></li>
+                <li><a href="/faq" class="nav-link">FAQ</a></li>
+                <li><a href="/contact" class="nav-link btn-nav" data-i18n="nav_contact">Contact</a></li>
+                <li class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <select id="languageSelector">
+                        <option value="fr">Français</option>
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article Hero -->
+    <section class="article-hero">
+        <div class="container">
+            <div class="article-hero-content" data-aos="fade-up">
+                <span class="article-category" id="articleCategory">Intelligence Artificielle</span>
+                <h1 class="article-title" id="articleTitle">IA Agentic : La révolution des assistants autonomes en 2026</h1>
+                <div class="article-meta">
+                    <div class="article-meta-item">
+                        <i class="far fa-calendar"></i>
+                        <span id="articleDate">20 Janvier 2026</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="far fa-clock"></i>
+                        <span id="articleReadTime">6 min de lecture</span>
+                    </div>
+                    <div class="article-meta-item">
+                        <i class="far fa-user"></i>
+                        <span>Par WindsIT</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Image -->
+    <section>
+        <div class="container">
+            <div class="article-featured-image" id="articleFeaturedImage" data-aos="fade-up">
+                <i class="fas fa-brain"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="article-content-wrapper">
+                <article class="article-content" id="articleContent" data-aos="fade-up">
+                    <p>
+                        L'intelligence artificielle évolue à une vitesse fulgurante. En 2026, nous assistons à l'émergence 
+                        d'une nouvelle génération d'assistants IA : les agents autonomes, capables d'exécuter des tâches 
+                        complexes sans intervention humaine constante. Cette révolution transforme fondamentalement la façon 
+                        dont nous développons et maintenons nos applications web.
+                    </p>
+                    
+                    <h2>Qu'est-ce qu'un agent IA autonome ?</h2>
+                    
+                    <p>
+                        Un agent IA autonome est un système intelligent qui peut percevoir son environnement, prendre des 
+                        décisions et agir de manière indépendante pour atteindre des objectifs spécifiques. Contrairement 
+                        aux chatbots traditionnels qui répondent simplement aux questions, ces agents peuvent :
+                    </p>
+                    
+                    <ul>
+                        <li>Analyser et comprendre des contextes complexes</li>
+                        <li>Planifier et exécuter des séquences d'actions</li>
+                        <li>Apprendre et s'adapter en temps réel</li>
+                        <li>Collaborer avec d'autres agents ou systèmes</li>
+                    </ul>
+                    
+                    <h2>Applications dans le développement web</h2>
+                    
+                    <p>
+                        Dans le contexte du développement web, les agents IA autonomes révolutionnent plusieurs aspects 
+                        de notre travail quotidien. Ils peuvent automatiser des workflows complexes, effectuer des tests 
+                        approfondis, et même gérer des déploiements avec une précision remarquable.
+                    </p>
+                    
+                    <blockquote>
+                        "Les agents IA autonomes ne remplacent pas les développeurs, ils les libèrent des tâches répétitives 
+                        pour se concentrer sur la créativité et l'innovation."
+                    </blockquote>
+                    
+                    <h3>Automatisation des workflows</h3>
+                    
+                    <p>
+                        Imaginez un agent qui surveille votre code en continu, détecte les problèmes potentiels avant même 
+                        qu'ils n'apparaissent, et propose automatiquement des corrections. C'est exactement ce que permettent 
+                        les agents IA modernes. Ils peuvent :
+                    </p>
+                    
+                    <ul>
+                        <li>Réviser automatiquement le code à chaque commit</li>
+                        <li>Générer des tests unitaires complets</li>
+                        <li>Optimiser les performances en temps réel</li>
+                        <li>Gérer les dépendances et les mises à jour</li>
+                    </ul>
+                    
+                    <h3>Tests et qualité du code</h3>
+                    
+                    <p>
+                        Les agents IA peuvent exécuter des tests exhaustifs, identifier les bugs subtils que les tests 
+                        manuels pourraient manquer, et même suggérer des améliorations de code. Ils analysent les patterns, 
+                        détectent les anomalies et garantissent une qualité de code constante.
+                    </p>
+                    
+                    <h2>Intégration dans vos projets</h2>
+                    
+                    <p>
+                        Intégrer des agents IA dans vos projets n'est plus une science-fiction. Plusieurs plateformes et 
+                        outils facilitent cette intégration. Voici quelques approches pratiques :
+                    </p>
+                    
+                    <h3>Outils et plateformes recommandés</h3>
+                    
+                    <p>
+                        Des solutions comme GitHub Copilot Workspace, Cursor AI, et d'autres plateformes émergentes 
+                        permettent d'intégrer des agents IA directement dans votre workflow de développement. Ces outils 
+                        comprennent votre contexte, apprennent de vos préférences, et s'adaptent à votre style de code.
+                    </p>
+                    
+                    <h2>L'avenir du développement web</h2>
+                    
+                    <p>
+                        Les agents IA autonomes représentent l'avenir du développement web. Ils ne sont pas là pour remplacer 
+                        les développeurs, mais pour les amplifier. En automatisant les tâches répétitives et en gérant les 
+                        aspects techniques complexes, ils libèrent les développeurs pour se concentrer sur la résolution 
+                        de problèmes créatifs et l'innovation.
+                    </p>
+                    
+                    <p>
+                        En 2026, les entreprises qui adoptent ces technologies gagnent un avantage concurrentiel significatif. 
+                        Elles peuvent livrer des produits plus rapidement, avec une qualité supérieure, et à moindre coût. 
+                        L'ère des agents IA autonomes est arrivée, et elle transforme notre industrie de manière permanente.
+                    </p>
+                </article>
+                
+                <!-- Tags -->
+                <div class="article-tags">
+                    <a href="#" class="article-tag">#IntelligenceArtificielle</a>
+                    <a href="#" class="article-tag">#DéveloppementWeb</a>
+                    <a href="#" class="article-tag">#Automatisation</a>
+                    <a href="#" class="article-tag">#Innovation</a>
+                    <a href="#" class="article-tag">#Tech2026</a>
+                </div>
+                
+                <!-- Author Section -->
+                <div class="article-author" data-aos="fade-up">
+                    <div class="author-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="author-info">
+                        <h4>Équipe WindsIT</h4>
+                        <p>Experts en transformation digitale et développement web innovant. Nous partageons nos connaissances et expériences pour vous aider à réussir dans le monde digital.</p>
+                        <div class="author-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Share Section -->
+                <div class="article-share" data-aos="fade-up">
+                    <h4>Partager cet article</h4>
+                    <div class="share-buttons">
+                        <button class="share-btn share-btn-facebook" onclick="shareOnFacebook()">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </button>
+                        <button class="share-btn share-btn-twitter" onclick="shareOnTwitter()">
+                            <i class="fab fa-twitter"></i>
+                            Twitter
+                        </button>
+                        <button class="share-btn share-btn-linkedin" onclick="shareOnLinkedIn()">
+                            <i class="fab fa-linkedin-in"></i>
+                            LinkedIn
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="related-articles">
+        <div class="container">
+            <h3 data-aos="fade-up">Articles similaires</h3>
+            <div class="related-grid">
+                <div class="related-card" data-aos="fade-up">
+                    <div class="related-card-image">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <div class="related-card-content">
+                        <h4>Web3 et expériences immersives</h4>
+                        <p>Découvrez comment le Web3 transforme le commerce digital avec des expériences immersives...</p>
+                        <a href="/article?slug=web3-experiences-immersives">Lire l'article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="related-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="related-card-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="related-card-content">
+                        <h4>Applications natives vs PWA</h4>
+                        <p>Comparaison approfondie entre applications natives et Progressive Web Apps en 2026...</p>
+                        <a href="/article?slug=pwa-vs-native">Lire l'article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="related-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="related-card-image">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="related-card-content">
+                        <h4>Sécurité post-quantique</h4>
+                        <p>Préparez votre infrastructure pour l'ère quantique avec les algorithmes post-quantiques...</p>
+                        <a href="/article?slug=securite-post-quantique">Lire l'article <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>Winds<span>IT</span></h3>
+                    </div>
+                    <p class="footer-description">
+                        Agence de digitalisation spécialisée en solutions digitales innovantes, 
+                        branding et développement web & mobile.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/nos-services">Social Media Management</a></li>
+                        <li><a href="/nos-services">Branding & Identité</a></li>
+                        <li><a href="/nos-services">Développement Web</a></li>
+                        <li><a href="/nos-services">Applications Mobile</a></li>
+                        <li><a href="/nos-services">Solutions IA</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Entreprise</h4>
+                    <ul>
+                        <li><a href="/about">À propos</a></li>
+                        <li><a href="/realisations">Réalisations</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                        <li><a href="/carrieres">Carrières</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Abidjan Cocody Angré Djorogobité<br>Côte d'Ivoire</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@windsit-digital.com</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+225 07 78 13 72 32</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 WindsIT. Tous droits réservés.</p>
+                <div class="footer-links">
+                    <a href="#">Mentions légales</a>
+                    <a href="#">Politique de confidentialité</a>
+                    <a href="#">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/article-data.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Share functions
+        function shareOnFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+        }
+
+        function shareOnTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent(document.getElementById('articleTitle').textContent);
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+        }
+
+        function shareOnLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+        }
+
+        // Load article data from URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+            
+            if (slug && typeof articleData !== 'undefined' && articleData[slug]) {
+                loadArticle(articleData[slug]);
+            }
+        });
+
+        function loadArticle(data) {
+            document.getElementById('articleCategory').textContent = data.category;
+            document.getElementById('articleTitle').textContent = data.title;
+            document.getElementById('articleDate').textContent = data.date;
+            document.getElementById('articleReadTime').textContent = data.readTime + ' min de lecture';
+            
+            // Update featured image icon
+            const featuredImage = document.getElementById('articleFeaturedImage');
+            featuredImage.innerHTML = `<i class="${data.icon}"></i>`;
+            
+            // Update content
+            document.getElementById('articleContent').innerHTML = data.content;
+            
+            // Update page title
+            document.title = data.title + ' - WindsIT';
+        }
+    </script>
+</body>
+</html>
