@@ -771,22 +771,49 @@
             const slug = urlParams.get('slug');
             
             if (slug && typeof articleData !== 'undefined' && articleData[slug]) {
-                loadArticle(articleData[slug]);
+                const article = articleData[slug];
+                article.slug = slug; // Add slug to article data
+                loadArticle(article);
+            }
+            
+            // Reload article when language changes
+            if (window.LanguageManager) {
+                const originalSetLanguage = window.LanguageManager.setLanguage;
+                window.LanguageManager.setLanguage = function(lang, showNotification = true) {
+                    originalSetLanguage.call(this, lang, showNotification);
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const slug = urlParams.get('slug');
+                    if (slug && typeof articleData !== 'undefined' && articleData[slug]) {
+                        const article = articleData[slug];
+                        article.slug = slug;
+                        loadArticle(article);
+                    }
+                };
             }
         });
 
         function loadArticle(data) {
-            document.getElementById('articleCategory').textContent = data.category;
-            document.getElementById('articleTitle').textContent = data.title;
+            // Get current language
+            const currentLang = (window.LanguageManager && window.LanguageManager.currentLang) || 'fr';
+            const langData = data[currentLang] || data.fr || data;
+            
+            // Get translated text or fallback to French
+            const category = langData.category || data.category;
+            const title = langData.title || data.title;
+            const content = langData.content || data.content;
+            const readTimeText = currentLang === 'en' ? ' min read' : currentLang === 'es' ? ' min de lectura' : ' min de lecture';
+            
+            document.getElementById('articleCategory').textContent = category;
+            document.getElementById('articleTitle').textContent = title;
             document.getElementById('articleDate').textContent = data.date;
-            document.getElementById('articleReadTime').textContent = data.readTime + ' min de lecture';
+            document.getElementById('articleReadTime').textContent = data.readTime + readTimeText;
             
             // Update featured image
             const featuredImg = document.getElementById('articleFeaturedImg');
             const featuredIcon = document.getElementById('articleFeaturedIcon');
             if (data.image) {
                 featuredImg.src = data.image;
-                featuredImg.alt = data.title;
+                featuredImg.alt = title;
                 featuredImg.style.display = 'block';
                 featuredIcon.style.display = 'none';
             } else {
@@ -796,10 +823,10 @@
             }
             
             // Update content
-            document.getElementById('articleContent').innerHTML = data.content;
+            document.getElementById('articleContent').innerHTML = content;
             
             // Update page title
-            document.title = data.title + ' - WindsIT';
+            document.title = title + ' - WindsIT';
             
             // Load related articles
             loadRelatedArticles(data.slug || '');
